@@ -1,1 +1,1 @@
-# C++ Group Project - Team Monte-Carlo
+# C++ Group Project: Team Monte-Carlo
