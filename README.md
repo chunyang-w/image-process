@@ -12,7 +12,6 @@
 ## 🔎 Project source code director explained
 
 ```
-src
 main.cpp (main source code)
 makefile (make file that controls the generation of the program)
 |- build (objective files)
