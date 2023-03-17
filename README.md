@@ -13,21 +13,21 @@
 
 ```
 src
-    main.cpp (main source code)
-    makefile (make file that controls the generation of the program)
-	|- build (objective files)
-		|- image.o
-        |- filter.o
-        |- *.o
-	|- include (header files)
-		|- filter.h
-		|- image.h
-        |- *.h
-	|- source (source code)
-		|- filter.cpp
-		|- image.cpp
-        |- *.cpp
-    |- io-demo (minimal demo here)
-		|- minimal.cpp
+main.cpp (main source code)
+makefile (make file that controls the generation of the program)
+|- build (objective files)
+    |- image.o
+    |- filter.o
+    |- *.o
+|- include (header files)
+    |- filter.h
+    |- image.h
+    |- *.h
+|- source (source code)
+    |- filter.cpp
+    |- image.cpp
+    |- *.cpp
+|- io-demo (minimal demo here)
+    |- minimal.cpp
 ```
 
