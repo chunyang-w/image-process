@@ -5,7 +5,7 @@
 using namespace std;
 
 Image::Image(string path) {
-    cout << "constructor called" << endl;
+    // cout << "constructor called" << endl;
     int w, h, c;
     unsigned char* img;
     // Read in image file
@@ -41,8 +41,33 @@ Image::Image(string path) {
     stbi_image_free(img);
 }
 
+// copy constructor
+Image::Image(const Image & old_obj): width(old_obj.width), height(old_obj.height), channel(old_obj.channel)
+{
+    // cout << "copy constructor called" << endl;
+    vector<std::vector<std::vector<unsigned char>>> p;
+    p.resize(old_obj.width);
+    for (int i = 0; i < old_obj.width; i++) {
+        p[i].resize(old_obj.height);
+    }
+    for (int i = 0; i < old_obj.width; i++) {
+        for (int j = 0; j < old_obj.height; j++) {
+            p[i][j].resize(old_obj.channel);
+        }
+    }
+    // construct 3-D vector pixel:
+    for (int i = 0; i < old_obj.width; i++) {
+        for (int j = 0; j < old_obj.height; j++) {
+            for (int k = 0; k < old_obj.channel; k++) {
+                p[i][j][k] = old_obj.pixel[i][j][k];
+            }
+        }
+    }
+    this->pixel = p;
+}
+
 Image::~Image() {
-    cout << "deconstructor called" << endl;
+    // cout << "deconstructor called" << endl;
 }
 
 void Image::write(string path) {

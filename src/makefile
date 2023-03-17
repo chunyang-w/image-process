@@ -14,7 +14,7 @@ OBJS := $(patsubst ./source%.cpp, ./build%.o, $(SRCS))
 
 INPUTS := ./build/image.o ./build/volumn.o ./build/slice.o ./build/projection.o ./build/filter.o
 
-main: main.o ./build/image.o
+main: main.o $(INPUTS)
 	$(CXX) $(INC) $^ -o $@ -w
 
 main.o: main.cpp
@@ -32,7 +32,7 @@ main.o: main.cpp
 ./build/slice.o: ./source/slice.cpp
 	$(CXX) $(INC) -c $^ -o $@ -w
 
-./build/volumn.o: ./source/volumn.cpp
+./build/volumn.o: ./source/volume.cpp
 	$(CXX) $(INC) -c $^ -o $@ -w
 
 demo: ./io-demo/minimal.cpp
