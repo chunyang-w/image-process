@@ -1,25 +1,67 @@
+# specify compiler
 CXX = g++-12
 
+# include path
 EXTRA_PATH = ./include/
-INCLUDES = -I$(EXTRA_PATH)
+INCLUDES = -I $(EXTRA_PATH)
 INC = $(INCLUDES)
 
-main: main.o matrix.o csrmatrix.o
-	$(CXX) $^ -o $@ $(INC) -w
-	@./main
+SRCDIR := ./source
+SRCS := $(wildcard $(SRCDIR)/*.cpp)
+
+OBJ_DIR := ./build
+OBJS := $(patsubst ./source%.cpp, ./build%.o, $(SRCS))
+
+INPUTS := ./build/image.o ./build/volumn.o ./build/slice.o ./build/projection.o ./build/filter.o
+
+main: main.o ./build/image.o
+	$(CXX) $(INC) $^ -o $@ -w
 
 main.o: main.cpp
-	$(CXX) -c $^ -o $@ $(INC) -w
+	$(CXX) $(INC) -c $^ -o $@ -w
 
-# matrix.o: ../assessment_matrix/Matrix.cpp
-# 	$(CXX) -c $(EXTRA_PATH)Matrix.cpp -o $@ $(INC) -g
+./build/image.o: ./source/image.cpp
+	$(CXX) $(INC) -c $^ -o $@ -w
 
-# csrmatrix.o: ../assessment_matrix/CSRMatrix.cpp
-# 	$(CXX) -c $(EXTRA_PATH)CSRMatrix.cpp -o $@ $(INC) -g
+./build/filter.o: ./source/filter.cpp
+	$(CXX) $(INC) -c $^ -o $@ -w
+
+./build/projection.o: ./source/projection.cpp
+	$(CXX) $(INC) -c $^ -o $@ -w
+
+./build/slice.o: ./source/slice.cpp
+	$(CXX) $(INC) -c $^ -o $@ -w
+
+./build/volumn.o: ./source/volumn.cpp
+	$(CXX) $(INC) -c $^ -o $@ -w
 
 demo: ./io-demo/minimal.cpp
-	$(CXX) $^ -o $@ $(INC) -w
+	$(CXX) $(INC) $^ -o $@  -w
 	@./demo
 
+.PHONY: run
+run:
+	@make clean
+	@make
+	@echo ""
+	@echo "======= RUNNING PROGRAM ======="
+	@echo ""
+	@./main
+	@echo ""
+	@echo "======= RUNNING FINISH ======="
+
+
+.PHONY: clean
 clean:
+	rm -f ./build/*.o
 	rm -f *.o
+
+# main: $(OBJS) main.o 
+# 	$(CXX) $(INC) $^ -o $@ -w
+# 	@./main
+
+# main.o: main.cpp
+# 	$(CXX) $(INC) -c $^ -o $@ -w
+
+# $(OBJS): %.o: %.cpp
+# 	$(CXX) $(INC) -c $< -o $@  -w
