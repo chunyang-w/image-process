@@ -1,6 +1,6 @@
 # 🖥️ C++ Group Project: Team Monte-Carlo
 
-## Programme instructions:
+## 🧪 Programme instructions:
 
 (all command have to be executed under src directory)
 
@@ -9,7 +9,7 @@
 + Clean objective files: `make clean`
 + Run minimal demo: `make demo`
 
-##🔎 Project source code director explained
+## 🔎 Project source code director explained
 src
     main.cpp (main source code)
     makefile (make file that controls the generation of the program)
