@@ -10,6 +10,8 @@
 + Run minimal demo: `make demo`
 
 ## 🔎 Project source code director explained
+
+```
 src
     main.cpp (main source code)
     makefile (make file that controls the generation of the program)
@@ -27,4 +29,5 @@ src
         |- *.cpp
     |- io-demo (minimal demo here)
 		|- minimal.cpp
+```
 
