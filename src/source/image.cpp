@@ -20,19 +20,19 @@ Image::Image(string path) {
     this->width = w; this->height = h; this->channel = c;
     // init 3-D vector pixel
     // cout << "hello 111 " << this->pixel.size() << endl;
-    this->pixel.resize(w);
-    for (int i = 0; i < w; i++) {
-        this->pixel[i].resize(h);
+    this->pixel.resize(h);
+    for (int i = 0; i < h; i++) {
+        this->pixel[i].resize(w);
     }
-    for (int i = 0; i < w; i++) {
-        for (int j = 0; j < h; j++) {
+    for (int i = 0; i < h; i++) {
+        for (int j = 0; j < w; j++) {
             this->pixel[i][j].resize(c);
         }
     }
     // construct 3-D vector pixel:
     unsigned char* pix = img;
-    for (int i = 0; i < w; i++) {
-        for (int j = 0; j < h; j++) {
+    for (int i = 0; i < h; i++) {
+        for (int j = 0; j < w; j++) {
             for (int k = 0; k < c; k++) {
                 pixel[i][j][k] = (uint8_t) *pix;
                 pix +=1;
@@ -48,18 +48,18 @@ Image::Image(const Image & old_obj): width(old_obj.width), height(old_obj.height
 {
     // cout << "copy constructor called" << endl;
     vector<std::vector<std::vector<unsigned char>>> p;
-    p.resize(old_obj.width);
-    for (int i = 0; i < old_obj.width; i++) {
-        p[i].resize(old_obj.height);
+    p.resize(old_obj.height);
+    for (int i = 0; i < old_obj.height; i++) {
+        p[i].resize(old_obj.width);
     }
-    for (int i = 0; i < old_obj.width; i++) {
-        for (int j = 0; j < old_obj.height; j++) {
+    for (int i = 0; i < old_obj.height; i++) {
+        for (int j = 0; j < old_obj.width; j++) {
             p[i][j].resize(old_obj.channel);
         }
     }
     // construct 3-D vector pixel:
-    for (int i = 0; i < old_obj.width; i++) {
-        for (int j = 0; j < old_obj.height; j++) {
+    for (int i = 0; i < old_obj.height; i++) {
+        for (int j = 0; j < old_obj.width; j++) {
             for (int k = 0; k < old_obj.channel; k++) {
                 p[i][j][k] = (uint8_t) old_obj.pixel[i][j][k];
             }
@@ -74,34 +74,13 @@ Image::~Image() {
 
 void Image::write(string path) {
     // cout << "writing image with" << endl;
-    cout << "In writing" << endl;
-    this->printSize();
+    // this->printSize();
     unsigned char *img = new unsigned char[this->width * this->height * this->channel];
     unsigned char *pix;
     pix = img;
 
-    // to del
-    for (int i = 0; i < this->width; i++) {
-        for (int j = 0; j < this->height; j++) {
-            for (int k = 0; k < this->channel; k++) {
-                if (j < 20) {
-                    this->pixel[i][j][k] = (unsigned char) 0;
-                }
-            }
-        }
-    }
-    // to del
-    // for (int i = 0; i < this->width; i++) {
-    //     for (int j = 0; j < this->height; j++) {
-    //         if (this->pixel[i][j][0] == 0 ) {
-    //             cout <<"*"<< i << " " << j << endl;
-    //         }
-    //     }
-    // }
-    // this->printSize();
-
-    for (int i = 0; i < this->width; i++) {
-        for (int j = 0; j < this->height; j++) {
+    for (int i = 0; i < this->height; i++) {
+        for (int j = 0; j < this->width; j++) {
             for (int k = 0; k < this->channel; k++) {
                 *pix = (unsigned char) pixel[i][j][k];
                 // if (j < 40) {
@@ -111,18 +90,6 @@ void Image::write(string path) {
             }
         }
     }
-    // int count  = 0;
-    // for (unsigned char* p = img; p != img + (this->width*this->height*this->channel); p += this->channel) {
-    //     // cout <<(count % w)  << endl;
-    //         if ((count % this->width) < 50) {
-    //             *p =  0;
-    //             *(p+1) =  0;
-    //             *(p+2) =  0;
-    //         }
-    //         count++;
-    // } 
-    // del
-    cout << "***" << endl << this->width << " " << this->height << endl;
 
     int success = stbi_write_png(path.c_str(), this->width, this->height, this->channel, img, 0);
     if (success == 0) {
@@ -131,21 +98,6 @@ void Image::write(string path) {
         cout << "writing success" << endl;
     }
     delete[] img;
-    // del
-    pix = img;
-    fstream f;
-    f.open("./test.txt");
-    for (int i = 0; i < this->width; i++) {
-        int sum = 0;
-        for (int j = 0; j < this->height; j++) {
-            sum++;
-            *pix = (unsigned char) pixel[i][j][0];
-            pix+=this->channel;
-            f << (int)*pix << " ";
-        }
-        f << " sum is : " << sum;
-        f << endl;
-    }
 }
 
 void Image::printSize() {
@@ -158,49 +110,35 @@ Image Image::pad(int padding) {
     // set padded size
     new_img.height = this->height + 2*padding;
     new_img.width = this->width + 2*padding;
-    this->printSize();
-    new_img.printSize();
     // construct a new image with padded size
     vector<std::vector<std::vector<unsigned char>>> new_pixel;
-    new_pixel.resize(new_img.width);
-    for (int i = 0; i < new_img.width; i++) {
-        new_pixel[i].resize(new_img.height);
+    new_pixel.resize(new_img.height);
+    for (int i = 0; i < new_img.height; i++) {
+        new_pixel[i].resize(new_img.width);
     }
-    for (int i = 0; i < new_img.width; i++) {
-        for (int j = 0; j < new_img.height; j++) {
+    for (int i = 0; i < new_img.height; i++) {
+        for (int j = 0; j < new_img.width; j++) {
             new_pixel[i][j].resize(new_img.channel);
         }
     }
     new_img.pixel = new_pixel;
     // new_img.write("../Output/j.png");
-    cout << new_img.pixel.size() << " " << new_img.pixel[0].size() << " " << new_img.pixel[0][0].size() << endl;
-    cout << "here" << endl;
+    // cout << new_img.pixel.size() << " " << new_img.pixel[0].size() << " " << new_img.pixel[0][0].size() << endl;
+    // cout << "here" << endl;
     // copy pixels form old image to padded image
-    for (int i = 0; i < new_img.width; i++) {
-        for (int j = 0; j < new_img.height; j++) {
+    for (int i = 0; i < new_img.height; i++) {
+        for (int j = 0; j < new_img.width; j++) {
             for (int k = 0; k < new_img.channel; k++) {
                 new_img.pixel[i][j][k] = (uint8_t) 0;
             }
         }
     }
-    for (int i = 0; i < this->width; i++) {
-        for (int j = 0; j < this->height; j++) {
+    for (int i = 0; i < this->height; i++) {
+        for (int j = 0; j < this->width; j++) {
             for (int k = 0; k < this->channel; k++) {
-                // cout << i << "," << j << "->" << i+padding << " " << j+padding << endl;
-                new_img.pixel[i+padding][j+padding][k] = (uint8_t) 225;
+                new_img.pixel[i+padding][j+padding][k] = this->pixel[i][j][k];
             }
         }
     }
-    for (int i = 0; i < this->width; i++) {
-        for (int j = 0; j < 1; j++) {
-            for (int k = 0; k < this->channel; k++) {
-                this->pixel[i][j][k] = (uint8_t) 255;
-            }
-        }
-    }
-    new_img.printSize();
-    this->write("../Output/beforepad.png");
-    new_img.write("../Output/afterpad.png");
-    cout << "nice" << endl;
     return new_img;
 }

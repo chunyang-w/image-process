@@ -56,6 +56,11 @@ clean:
 	rm -f ./build/*.o
 	rm -f *.o
 
+
+.PHONY: nimg
+nimg:
+	@echo "No image can survive"
+	rm -f ../Output/*.png
 # main: $(OBJS) main.o 
 # 	$(CXX) $(INC) $^ -o $@ -w
 # 	@./main

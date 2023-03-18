@@ -43,7 +43,7 @@ int main() {
     stbi_image_free(data);
 
     // make fake
-    int w_test = 512, h_test = 513, c_test = 4;
+    int w_test = 512, h_test = 1024, c_test = 4;
     unsigned char *test = new unsigned char[w_test*h_test*c_test];
     cout << "here" << endl;
     for (unsigned char* p = test; p != test + (w_test*h_test*c_test); p += c_test) {

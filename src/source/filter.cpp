@@ -4,6 +4,7 @@
 using namespace std;
 
 Image grayScale(Image img) {
+    cout << "in gray" << endl;
     // img.printSize();
     int max_channel;
     if (img.channel >=3) {
@@ -11,8 +12,8 @@ Image grayScale(Image img) {
     } else {
         max_channel = img.channel;
     }
-    for (int i = 0; i < img.width; i++) {
-        for (int j = 0; j < img.height; j++) {
+    for (int i = 0; i < img.height; i++) {
+        for (int j = 0; j < img.width; j++) {
             int sum = 0;
             for (int k = 0; k < max_channel; k++) {
                 sum += int(img.pixel[i][j][k]);
@@ -38,8 +39,8 @@ Image colorBalance(Image img) {
     }
     vector<int> channel_avg;
     channel_avg.resize(max_channel);
-    for (int i = 0; i < img.width; i++) {
-        for (int j = 0; j < img.height; j++) {
+    for (int i = 0; i < img.height; i++) {
+        for (int j = 0; j < img.width; j++) {
             int sum = 0;
             for (int k = 0; k < max_channel; k++) {
                 channel_avg[k] += int(img.pixel[i][j][k]);
@@ -50,8 +51,8 @@ Image colorBalance(Image img) {
         avg_intensity += channel_avg[i];
     }
     avg_intensity = avg_intensity / 3;
-    for (int i = 0; i < img.width; i++) {
-        for (int j = 0; j < img.height; j++) {
+    for (int i = 0; i < img.height; i++) {
+        for (int j = 0; j < img.width; j++) {
             int sum = 0;
             for (int k = 0; k < max_channel; k++) {
                 int diff = (avg_intensity - channel_avg[k]) / num_pixel;
