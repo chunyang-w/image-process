@@ -1,7 +1,50 @@
 # include <iostream>
+# include <string>
+# include <vector>
+# include <fstream>
+# include <sstream>
+# include <math.h>
 # include "filter.h"
 
 using namespace std;
+
+Filter::Filter(string path) {
+    fstream f;
+    f.open(path);
+    string line;
+    while(getline(f, line)) {
+        vector<double> temp;
+        double num;
+        stringstream stream(line);
+        while(stream >> num) {
+            temp.push_back(num);
+        }
+        this->kernel.push_back(temp);
+    }
+    this->kernel_size = this->kernel.size();
+    this->padding_size = floor(this->kernel_size / 2);
+}
+
+Image Filter::apply(Image img) {
+    Image pad_img = img.pad(this->padding_size);
+    Image res_img(img);
+    for (int i = 0; i < res_img.height; i++) {
+        for (int j = 0; j < res_img.width; j++) {
+            for (int k = 0; k < res_img.channel; k++) {
+                double sum = 0;
+                int res;
+                for (int m = i-this->padding_size; m <= i+this->padding_size; m++) {
+                    for (int n = j-this->padding_size; n <= j+this->padding_size; n++) {
+                        sum += (double)(pad_img.pixel[m+this->padding_size][n+this->padding_size][k]);
+                    }
+                }
+                res = sum / (this->kernel_size * this->kernel_size);
+                res_img.pixel[i][j][k] = (uint8_t) res;
+            }
+        }
+    }
+    return res_img;
+}
 
 Image grayScale(Image img) {
     cout << "in gray" << endl;

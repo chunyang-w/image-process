@@ -73,8 +73,6 @@ Image::~Image() {
 }
 
 void Image::write(string path) {
-    // cout << "writing image with" << endl;
-    // this->printSize();
     unsigned char *img = new unsigned char[this->width * this->height * this->channel];
     unsigned char *pix;
     pix = img;
@@ -83,9 +81,6 @@ void Image::write(string path) {
         for (int j = 0; j < this->width; j++) {
             for (int k = 0; k < this->channel; k++) {
                 *pix = (unsigned char) pixel[i][j][k];
-                // if (j < 40) {
-                //     *pix = (unsigned char) 0;
-                // }
                 pix ++;
             }
         }
@@ -122,9 +117,6 @@ Image Image::pad(int padding) {
         }
     }
     new_img.pixel = new_pixel;
-    // new_img.write("../Output/j.png");
-    // cout << new_img.pixel.size() << " " << new_img.pixel[0].size() << " " << new_img.pixel[0][0].size() << endl;
-    // cout << "here" << endl;
     // copy pixels form old image to padded image
     for (int i = 0; i < new_img.height; i++) {
         for (int j = 0; j < new_img.width; j++) {

@@ -21,7 +21,7 @@ class Filter {
         // kernel container
         int kernel_size;
         int padding_size;
-        std::vector<std::vector<int> > kernel;
+        std::vector<std::vector<double> > kernel;
         // perform operation: apply filter to img
         Image apply(Image img);
 
