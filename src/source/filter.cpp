@@ -3,7 +3,7 @@
 
 using namespace std;
 
-Image Filter::grayScale(Image img) {
+Image grayScale(Image img) {
     // img.printSize();
     int max_channel;
     if (img.channel >=3) {
@@ -26,7 +26,7 @@ Image Filter::grayScale(Image img) {
     return img;
 }
 
-Image Filter::colorBalance(Image img) {
+Image colorBalance(Image img) {
     // img.printSize();
     int max_channel;
     int avg_intensity = 0;
@@ -50,7 +50,6 @@ Image Filter::colorBalance(Image img) {
         avg_intensity += channel_avg[i];
     }
     avg_intensity = avg_intensity / 3;
-    cout << avg_intensity << endl;
     for (int i = 0; i < img.width; i++) {
         for (int j = 0; j < img.height; j++) {
             int sum = 0;
@@ -64,10 +63,10 @@ Image Filter::colorBalance(Image img) {
     return img;
 }
 
-Image Filter::boxBlur(Image img) {
+Image boxBlur(Image img) {
     return img;
 }
 
-Image Filter::gaussianBlur(Image img) {
+Image gaussianBlur(Image img) {
     return img;
 }

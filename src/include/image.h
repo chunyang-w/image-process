@@ -26,4 +26,6 @@ class Image {
         void write(std::string path);
         // print Image size;
         void printSize();
+        // padding function
+        Image pad(int padding);
 };

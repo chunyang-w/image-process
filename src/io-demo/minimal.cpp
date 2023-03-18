@@ -28,11 +28,7 @@ int main() {
         cout << "Image load failed" << endl;
     }
 
-    for (unsigned char* p = data; p != data + (w*h*c/2); p += c) {
-            *p = (uint8_t) 0;
-            *(p+1) = (uint8_t) 0;
-            *(p+2) = (uint8_t) 0;
-    } 
+    int count = 0;
 
     // Save image to new filename
     int success = stbi_write_png("../Output/gracehopperx.png", w, h, c, data, 0);
@@ -46,5 +42,34 @@ int main() {
     // Deallocate memory
     stbi_image_free(data);
 
+    // make fake
+    int w_test = 512, h_test = 513, c_test = 4;
+    unsigned char *test = new unsigned char[w_test*h_test*c_test];
+    cout << "here" << endl;
+    for (unsigned char* p = test; p != test + (w_test*h_test*c_test); p += c_test) {
+        // cout <<(count % w_test)  << endl;
+            *p = (uint8_t) 40;
+            *(p+1) = (uint8_t) 200;
+            *(p+2) = (uint8_t) 12;  
+            *(p+3) = (uint8_t) 255;
+            // if ((count % w_test) < 20) {
+            //     *p = (uint8_t) 0;
+            //     *(p+1) = (uint8_t) 0;
+            //     *(p+2) = (uint8_t) 0;
+            //     // *(p+3) = (uint8_t) 0;
+            // }
+            count++;
+    } 
+    // Save image to new filename
+    success = stbi_write_png("../Images/fake.png", w_test, h_test, c_test, test, 0);
+
+    if (success == 0) {
+        cout << "writing test failed" << endl;
+    } else {
+        cout << "writing test success" << endl;
+    }
+
+    // Deallocate memory
+    stbi_image_free(test);
     return 0;
 }
