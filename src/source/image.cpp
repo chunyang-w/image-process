@@ -100,7 +100,7 @@ void Image::printSize() {
 }
 
 Image Image::pad(int padding) {
-    cout << "padding with length: " << padding << endl;
+    // cout << "padding with length: " << padding << endl;
     Image new_img = Image(*this);
     // set padded size
     new_img.height = this->height + 2*padding;
