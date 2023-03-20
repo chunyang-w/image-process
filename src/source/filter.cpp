@@ -17,6 +17,30 @@ string scharrx_path = "./filter/scharrx.txt";
 string scharry_path = "./filter/scharry.txt";
 string robertscrossx_path = "./filter/robertscrossx.txt";
 string robertscrossy_path = "./filter/robertscrossy.txt";
+string gaussian5_path = "./filter/gaussian5x5.txt";
+string gaussian7_path = "./filter/gaussian7x7.txt";
+
+
+// Function to find the median of a vector
+template<typename T>
+T median(vector<T>& vec) {
+    int size = vec.size();
+    int middle = size / 2;
+    
+    // Sort the vector
+    for (int i = 0; i <= middle; i++) {
+        for (int j = i + 1; j < size; j++) {
+            if (vec[j] < vec[i]) {
+                swap(vec[i], vec[j]);
+            }
+        }
+    }
+    
+    // Return median
+    return vec[middle];
+}
+
+
 
 Filter::Filter(string path) {
 
@@ -33,6 +57,7 @@ Filter::Filter(string path) {
         }
         this->kernel.push_back(temp);
     }
+
     this->kernel_size = this->kernel.size();
     this->padding_size = floor((this->kernel_size) / 2);
 }
@@ -67,7 +92,6 @@ Image Filter::apply(Image img) {
                         sum += current_pixel * current_coeff;
                     }
                 }
-
                 res_img.pixel[i][j][k] = (uint8_t) sum;
             }
         }
@@ -219,6 +243,69 @@ Image Brightness(Image img, int brightness) {
     return img;
 }
 
+Image imageBlur(Image img, char* method, int kernel_size) {
+
+    // Confirm valid method specified
+    if ((method != "median") & (method != "box") & (method != "gaussian")) {
+        cout << "Invalid argument - check method specified\n";
+        return img;}
+
+    // Check if we need to look up gaussian operator
+    else if (method == "gaussian") {
+
+        string path;
+        if (kernel_size == 5) {
+            path = gaussian5_path;
+        } else if (kernel_size == 7) {
+            path = gaussian7_path;
+        } else {cout << "Gaussian blur not possible with specified kernel size \n";}
+        
+        // Convolve gaussian operator with image
+        Filter gaussian(path.c_str());
+        Image res_img = gaussian.apply(img);
+
+        return res_img;}
+
+    else {
+
+        // Check for suitable kernel size
+        if (kernel_size%2 != 1) {
+        cout << "Invalid argument - kernel size must be odd number\n";
+        return img;}
+
+        // Pad image to allow calculation at edges
+        int padding_size = floor((kernel_size) / 2);
+        Image pad_img = img.pad(padding_size);
+        Image res_img(img);
+
+        // Loop through pixels in each channel
+        for (int i = 0; i < res_img.height; i++) {
+            for (int j = 0; j < res_img.width; j++) {
+                for (int k = 0; k < res_img.channel; k++) {
+
+                    vector<int> values;
+                    int sum = 0;
+            
+                    // Fill in vector containing values of the pixels in the kernel
+                    for (int m = i-padding_size; m <= i+padding_size; m++) {
+                        for (int n = j-padding_size; n <= j+padding_size; n++) {
+                            values.push_back(pad_img.pixel[m+padding_size][n+padding_size][k]);
+                            sum += pad_img.pixel[m+padding_size][n+padding_size][k];
+                        }
+                    }
+
+                    // Take median or mean depending on method specified
+                    if (method == "median") {
+                        res_img.pixel[i][j][k] = median(values);}
+                    else if (method == "box") {
+                        res_img.pixel[i][j][k] = sum/(kernel_size*kernel_size);
+                    }
+                }
+            }
+        }
+        return res_img;
+    }
+}
 
 Image edgeDetection(Image img, char* method) {
 

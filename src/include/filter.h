@@ -3,8 +3,6 @@
 # include <vector>
 # include "image.h"
 
-
-
 // Color correction filters
 // Example usage::
 //      Image img = grayScale(img);
@@ -13,6 +11,9 @@ Image grayScale(Image img);
 Image colorBalance(Image img);
 Image Brightness(Image img);
 Image Brightness(Image img, int brightness);
+
+// Image blur filters
+Image imageBlur(Image img, char* method, int kernel_size);
 
 
 // Edge-detection filters
