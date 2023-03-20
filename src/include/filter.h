@@ -14,11 +14,14 @@ Image grayScale(Image img);
 Image colorBalance(Image img);
 Image Brightness(Image img);
 Image Brightness(Image img, int brightness);
+Image histogramEqualisation(Image img);
+Image histogramEqualisationRGB(Image img);
 
 
 // Edge-detection filters
 Image sobel(Image img);
 Image prewitt(Image img);
+
 
 // Filter class
 // Example usage
