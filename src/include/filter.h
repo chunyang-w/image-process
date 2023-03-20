@@ -3,8 +3,7 @@
 # include <vector>
 # include "image.h"
 
-// std::string sobelx_path = "./filter/sobelx.txt";
-// std::string sobely_path = "./filter/sobely.txt";
+
 
 // Color correction filters
 // Example usage::
@@ -19,8 +18,7 @@ Image histogramEqualisationRGB(Image img);
 
 
 // Edge-detection filters
-Image sobel(Image img);
-Image prewitt(Image img);
+Image edgeDetection(Image img, char* method);
 
 
 // Filter class

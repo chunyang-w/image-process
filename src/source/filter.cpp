@@ -1,5 +1,4 @@
 # include <iostream>
-# include <algorithm>
 # include <string>
 # include <vector>
 # include <fstream>
@@ -9,43 +8,58 @@
 
 using namespace std;
 
-// define path to sobel x, y filters
+// Define path names to filter operators
 string sobelx_path = "./filter/sobelx.txt";
 string sobely_path = "./filter/sobely.txt";
-// define path to prewitt x, y filters
 string prewittx_path = "./filter/prewittx.txt";
 string prewitty_path = "./filter/prewitty.txt";
+string scharrx_path = "./filter/scharrx.txt";
+string scharry_path = "./filter/scharry.txt";
+string robertscrossx_path = "./filter/robertscrossx.txt";
+string robertscrossy_path = "./filter/robertscrossy.txt";
 
 Filter::Filter(string path) {
+
+    // Read in operator from text file
     fstream f;
     f.open(path);
     string line;
-    // cout << "using kernel" << endl;
     while(getline(f, line)) {
         vector<double> temp;
         double num;
         stringstream stream(line);
         while(stream >> num) {
             temp.push_back(num);
-            // cout << num << " ";
         }
-        // cout << endl;
         this->kernel.push_back(temp);
     }
     this->kernel_size = this->kernel.size();
-    this->padding_size = floor(this->kernel_size / 2);
+    this->padding_size = floor((this->kernel_size) / 2);
 }
 
 Image Filter::apply(Image img) {
+
+    // Pad image to allow convolution at edges
     Image pad_img = img.pad(this->padding_size);
     Image res_img(img);
+
+    // Loop through pixels in each channel
     for (int i = 0; i < res_img.height; i++) {
         for (int j = 0; j < res_img.width; j++) {
             for (int k = 0; k < res_img.channel; k++) {
+
                 double sum = 0;
                 int res;
-                for (int m = i-this->padding_size; m <= i+this->padding_size; m++) {
-                    for (int n = j-this->padding_size; n <= j+this->padding_size; n++) {
+                int increment;
+
+                // Ensure convolution works for both odd and even sized operators
+                if (this->kernel.size()%2 == 0) {
+                    increment = this->padding_size - 1;}
+                else {increment = this->padding_size;}
+
+                // Calculate new value for each pixel based on the values of its neighbours
+                for (int m = i-this->padding_size; m <= i+increment; m++) {
+                    for (int n = j-this->padding_size; n <= j+increment; n++) {
                         int r = m - i + this->padding_size;
                         int s = n - j + this->padding_size;
                         double current_pixel = pad_img.pixel[m+this->padding_size][n+this->padding_size][k];
@@ -53,8 +67,7 @@ Image Filter::apply(Image img) {
                         sum += current_pixel * current_coeff;
                     }
                 }
-                // res = sum / (this->kernel_size * this->kernel_size);
-                // res = sum;
+
                 res_img.pixel[i][j][k] = (uint8_t) sum;
             }
         }
@@ -206,15 +219,46 @@ Image Brightness(Image img, int brightness) {
     return img;
 }
 
-Image sobel(Image img) {
-    Filter sobelx(sobelx_path.c_str());
-    Filter sobely(sobely_path.c_str());
+Image edgeDetection(Image img, char* method) {
 
-    Image x = sobelx.apply(img);
-    Image y = sobelx.apply(img);
+    // Convert image to grayscale before any edge detection
+    img = grayScale(img);
+
+    string x_path;
+    string y_path;
+    
+    // Choose operator
+    if (method == "sobel") {
+        x_path = sobelx_path;
+        y_path = sobely_path; 
+
+    } else if (method == "prewitt") {
+        x_path = prewittx_path;
+        y_path = prewitty_path; 
+
+    } else if (method == "scharr") {
+        x_path = scharrx_path;
+        y_path = scharry_path; 
+
+    } else if (method == "roberts_cross") {
+        x_path = robertscrossx_path;
+        y_path = robertscrossy_path; 
+
+    } else {
+        cout << "Invalid argument - check operator specified\n";
+        return img;
+    } 
+
+    // Convolve image with operator
+    Filter edge_x(x_path.c_str());
+    Filter edge_y(y_path.c_str());
+
+    Image x = edge_x.apply(img);
+    Image y = edge_y.apply(img);
 
     Image res(img);
 
+    // Combine results of x and y operators
     for (int i = 0; i < res.height; i++) {
         for (int j = 0; j < res.width; j++) {
             for (int k = 0; k < res.channel; k++) {
@@ -223,34 +267,13 @@ Image sobel(Image img) {
                 res.pixel[i][j][k] = sqrt(pow(x_pix, 2) + pow(y_pix, 2));
             }
         }
-    }
+    } 
 
     return res;
 }
 
-Image prewitt(Image img) {
-    Filter prewittx(prewittx_path.c_str());
-    Filter prewitty(prewitty_path.c_str());
 
-    Image x = prewittx.apply(img);
-    Image y = prewitty.apply(img);
-
-    Image res(img);
-
-    for (int i = 0; i < res.height; i++) {
-        for (int j = 0; j < res.width; j++) {
-            for (int k = 0; k < res.channel; k++) {
-                int x_pix = x.pixel[i][j][k];
-                int y_pix = y.pixel[i][j][k];
-                res.pixel[i][j][k] = sqrt(pow(x_pix, 2) + pow(y_pix, 2));
-            }
-        }
-    }
-
-    return res;
-}
-
-// Histogram equalisation filter for color images
+// Histogram equalisation filter
 Image histogramEqualisation(Image img) {
  
 
@@ -339,3 +362,4 @@ Image histogramEqualisationRGB(Image img) {
 
     return res;
 }
+
