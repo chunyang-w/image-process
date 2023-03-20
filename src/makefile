@@ -12,7 +12,7 @@ SRCS := $(wildcard $(SRCDIR)/*.cpp)
 OBJ_DIR := ./build
 OBJS := $(patsubst ./source%.cpp, ./build%.o, $(SRCS))
 
-INPUTS := ./build/image.o ./build/volumn.o ./build/slice.o ./build/projection.o ./build/filter.o ./build/filter3d.o
+INPUTS := ./build/image.o ./build/volumn.o ./build/slice.o ./build/projection.o ./build/filter.o ./build/filter3d.o ./build/fastImage.o
 
 main: main.o $(INPUTS)
 	$(CXX) $(INC) $^ -o $@ -w
@@ -36,6 +36,9 @@ main.o: main.cpp
 	$(CXX) $(INC) -c $^ -o $@ -w
 
 ./build/filter3d.o: ./source/filter3d.cpp
+	$(CXX) $(INC) -c $^ -o $@ -w
+
+./build/fastImage.o: ./source/fastImage.cpp
 	$(CXX) $(INC) -c $^ -o $@ -w
 
 demo: ./io-demo/minimal.cpp
