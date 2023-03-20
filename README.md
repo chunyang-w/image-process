@@ -9,7 +9,7 @@
 + Clean objective files: `make clean`
 + Run minimal demo: `make demo`
 
-## 🔎 Project source code director explained
+## 🔎 Project source code directory explained
 
 ```
 main.cpp (main source code)
