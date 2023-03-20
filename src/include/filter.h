@@ -12,6 +12,8 @@
 //      img.write(string path);
 Image grayScale(Image img);
 Image colorBalance(Image img);
+Image Brightness(Image img);
+Image Brightness(Image img, int brightness);
 
 
 // Edge-detection filters

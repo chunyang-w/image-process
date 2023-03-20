@@ -63,14 +63,16 @@ Image Filter::apply(Image img) {
 }
 
 Image grayScale(Image img) {
-    // cout << "in gray" << endl;
-    // img.printSize();
+
+    // Determine size of for loops
     int max_channel;
     if (img.channel >=3) {
         max_channel = 3;
     } else {
         max_channel = img.channel;
     }
+
+    // Calculate average of each pixel across channels
     for (int i = 0; i < img.height; i++) {
         for (int j = 0; j < img.width; j++) {
             int sum = 0;
@@ -81,13 +83,16 @@ Image grayScale(Image img) {
             img.pixel[i][j].resize(1);
         }
     }
+
+    // Output is only one channel
     img.channel = 1;
-    // img.printSize();
+
     return img;
 }
 
 Image colorBalance(Image img) {
-    // img.printSize();
+
+    // Determine size of for loops
     int max_channel;
     int avg_intensity = 0;
     int num_pixel = img.width * img.height;
@@ -96,6 +101,8 @@ Image colorBalance(Image img) {
     } else {
         max_channel = img.channel;
     }
+
+    // Find average intensity of each channel
     vector<int> channel_avg;
     channel_avg.resize(max_channel);
     for (int i = 0; i < img.height; i++) {
@@ -106,23 +113,93 @@ Image colorBalance(Image img) {
             }
         }
     }
+
+    // Find average intensity of all channels
     for (int i = 0; i < max_channel; i++) {
         avg_intensity += channel_avg[i];
     }
     avg_intensity = avg_intensity / 3;
+
+    // Adjust each pixel by the difference between the channel's average and overall average
     for (int k = 0; k < max_channel; k++) {
         int diff = (avg_intensity - channel_avg[k]) / num_pixel;
-        cout << "channel " << k << " diff=" << diff << "\n";
+        for (int i = 0; i < img.height; i++) {
+            for (int j = 0; j < img.width; j++) {
+                int sum = 0;
+
+                // If statements to ensure no overflow if new value would be outside the 0-255 range
+                if (int(img.pixel[i][j][k]) < 0-diff) {
+                    img.pixel[i][j][k] = 0;}
+                else if (int(img.pixel[i][j][k]) > 255-diff) {
+                    img.pixel[i][j][k] = 255;}
+                else {img.pixel[i][j][k] = img.pixel[i][j][k] + diff;}
+            }
+        }
+    }
+    return img;
+}
+
+Image Brightness(Image img) {
+
+    // Determine size of for loops
+    int max_channel;
+    int num_pixel = img.width * img.height;
+    if (img.channel >=3) {
+        max_channel = 3;
+    } else {
+        max_channel = img.channel;
+    }
+
+    // Find average intensity of each channel
+    vector<int> channel_avg;
+    channel_avg.resize(max_channel);
+    for (int i = 0; i < img.height; i++) {
+        for (int j = 0; j < img.width; j++) {
+            int sum = 0;
+            for (int k = 0; k < max_channel; k++) {
+                channel_avg[k] += int(img.pixel[i][j][k]);
+            }
+        }
+    }
+
+    // Adjust each pixel by the difference between the default value (128) and the channel's average 
+    for (int k = 0; k < max_channel; k++) {
+        int diff = (128 - channel_avg[k]) / num_pixel;
         for (int i = 0; i < img.height; i++) {
             for (int j = 0; j < img.width; j++) {
                 int sum = 0;
                 if (int(img.pixel[i][j][k]) < 0-diff) {
-                    img.pixel[i][j][k] = 0;
-                }
+                    img.pixel[i][j][k] = 0;}
                 else if (int(img.pixel[i][j][k]) > 255-diff) {
-                    img.pixel[i][j][k] = 255;
-                }
+                    img.pixel[i][j][k] = 255;}
                 else {img.pixel[i][j][k] = img.pixel[i][j][k] + diff;}
+            }
+        }
+    }
+    return img;
+}
+
+Image Brightness(Image img, int brightness) {
+
+    // Determine size of for loops
+    int max_channel;
+    int num_pixel = img.width * img.height;
+    if (img.channel >=3) {
+        max_channel = 3;
+    } else {
+        max_channel = img.channel;
+    }
+
+    // Adjust each pixel by the value specified
+    for (int k = 0; k < max_channel; k++) {
+        for (int i = 0; i < img.height; i++) {
+            for (int j = 0; j < img.width; j++) {
+                int sum = 0;
+                if (int(img.pixel[i][j][k]) < 0-brightness) {
+                    img.pixel[i][j][k] = 0;}
+                else if (int(img.pixel[i][j][k]) > 255-brightness) {
+                    img.pixel[i][j][k] = 255;}
+                else {img.pixel[i][j][k] = img.pixel[i][j][k] + brightness;}
             }
         }
     }
