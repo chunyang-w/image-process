@@ -5,7 +5,6 @@
 
 class Volume {
     public:
-        int total_img;
         int img_num;
 
         std::vector<std::string> files;
