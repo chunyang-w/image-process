@@ -21,7 +21,7 @@ Volume::Volume(string root_dir) {
         if (file_name.length()<4)
             continue;
         else if(file_name.substr(file_name.length()-4,file_name.length()) == ".png"){
-            this->files.push_back(ptr->d_name);
+            this->files.push_back(root_dir + ptr->d_name);
             this->img_num ++;
         }
     }
