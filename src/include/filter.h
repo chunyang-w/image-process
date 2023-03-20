@@ -11,6 +11,8 @@ Image grayScale(Image img);
 Image colorBalance(Image img);
 Image Brightness(Image img);
 Image Brightness(Image img, int brightness);
+Image histogramEqualisation(Image img);
+Image histogramEqualisationRGB(Image img);
 
 // Image blur filters
 Image imageBlur(Image img, char* method, int kernel_size);
@@ -18,6 +20,7 @@ Image imageBlur(Image img, char* method, int kernel_size);
 
 // Edge-detection filters
 Image edgeDetection(Image img, char* method);
+
 
 // Filter class
 // Example usage
