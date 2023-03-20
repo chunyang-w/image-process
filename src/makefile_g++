@@ -1,5 +1,5 @@
 # specify compiler
-CXX = g++-12
+CXX = g++
 
 # include path
 EXTRA_PATH = ./include/

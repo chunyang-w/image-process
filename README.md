@@ -2,12 +2,15 @@
 
 ## 🧪 Programme instructions:
 
-(all command have to be executed under src directory)
+(all command have to be executed under src directory use g++-12 to compile)
 
 + To run the main program: `make run`
 + Complie program: `make`
 + Clean objective files: `make clean`
 + Run minimal demo: `make demo`
+
+(if you wish to use  g++)
++ run `make run -f makefile_g++`
 
 ## 🔎 Project source code directory explained
 

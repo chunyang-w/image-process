@@ -1,6 +1,7 @@
 # include <iostream>
 # include <vector>
 # include "image.h"
+# include "fastImage.h"
 # include "filter.h"
 # include "volume.h"
 # include "projection.h"
