@@ -1,4 +1,5 @@
 # include <iostream>
+# include <algorithm>
 # include <string>
 # include <vector>
 # include <fstream>
@@ -109,12 +110,19 @@ Image colorBalance(Image img) {
         avg_intensity += channel_avg[i];
     }
     avg_intensity = avg_intensity / 3;
-    for (int i = 0; i < img.height; i++) {
-        for (int j = 0; j < img.width; j++) {
-            int sum = 0;
-            for (int k = 0; k < max_channel; k++) {
-                int diff = (avg_intensity - channel_avg[k]) / num_pixel;
-                img.pixel[i][j][k] = img.pixel[i][j][k] + diff;
+    for (int k = 0; k < max_channel; k++) {
+        int diff = (avg_intensity - channel_avg[k]) / num_pixel;
+        cout << "channel " << k << " diff=" << diff << "\n";
+        for (int i = 0; i < img.height; i++) {
+            for (int j = 0; j < img.width; j++) {
+                int sum = 0;
+                if (int(img.pixel[i][j][k]) < 0-diff) {
+                    img.pixel[i][j][k] = 0;
+                }
+                else if (int(img.pixel[i][j][k]) > 255-diff) {
+                    img.pixel[i][j][k] = 255;
+                }
+                else {img.pixel[i][j][k] = img.pixel[i][j][k] + diff;}
             }
         }
     }
