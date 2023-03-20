@@ -360,55 +360,8 @@ Image edgeDetection(Image img, char* method) {
     return res;
 }
 
-
-// Histogram equalisation filter
-Image histogramEqualisation(Image img) {
- 
-
-    // Compute histogram of input image
-    vector<int> hist(256, 0);
-    for (int i = 0; i < img.height; i++) {
-        for (int j = 0; j < img.width; j++) {
-            hist[img.pixel[i][j][0]]++;
-        }
-    }
-
-    // Compute CDF
-    vector<int> cdf(256, 0);
-    cdf[0] = hist[0];
-    for (int i = 1; i < 256; i++) {
-        cdf[i] = cdf[i-1] + hist[i];
-    }
-
-    // Compute normalized CDF
-    vector<double> norm_cdf(256, 0);
-    int total_pixels = img.height * img.width;
-    for (int i = 0; i < 256; i++) {
-        norm_cdf[i] = (double) cdf[i] / total_pixels;
-    }
-
-    // Create lookup table for mapping pixel values
-    vector<int> lookup(256, 0);
-    for (int i = 0; i < 256; i++) {
-        lookup[i] = round(norm_cdf[i] * 255);
-    }
-
-    // Apply lookup table to input image
-    Image res(img);
-    for (int i = 0; i < res.height; i++) {
-        for (int j = 0; j < res.width; j++) {
-            // Apply the lookup table to each channel separately
-            for (int k = 0; k < res.channel; k++) {
-                res.pixel[i][j][k] = lookup[res.pixel[i][j][k]];
-            }
-        }
-    }
-
-    return res;
-}
-
  // Histogram equalization filter for color images
-Image histogramEqualisationRGB(Image img) {
+Image histogramEqualisation(Image img) {
     Image res(img);
 
     for (int c = 0; c < img.channel; c++) {
