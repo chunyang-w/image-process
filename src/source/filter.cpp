@@ -219,6 +219,7 @@ Image Brightness(Image img, int brightness) {
     return img;
 }
 
+
 Image edgeDetection(Image img, char* method) {
 
     // Convert image to grayscale before any edge detection
