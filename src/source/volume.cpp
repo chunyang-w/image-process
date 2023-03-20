@@ -10,12 +10,12 @@ Volume::Volume(string root_dir) {
     this->root_dir = root_dir;
     this->img_num = 0;
 
-    // cout << "reading root dir ... root is: " << root_dir << endl; 
+    cout << "reading root dir ... root is: " << root_dir << endl; 
     struct dirent *ptr;    
     DIR *dir;
     string PATH = this->root_dir;
     dir=opendir(PATH.c_str()); 
-    cout << "file name list: "<< endl;
+    // cout << "file name list: "<< endl;
     while((ptr=readdir(dir))!=NULL) {   
         string file_name = ptr->d_name;
         if (file_name.length()<4)
