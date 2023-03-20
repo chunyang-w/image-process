@@ -59,8 +59,13 @@ clean:
 
 .PHONY: nimg
 nimg:
-	@echo "No image can survive"
-	rm -f ../Output/*.png
+	@echo ""
+	@echo "No out put image can survive this! Kill Kill Kill!"
+	@rm -f ../Output/*.png
+	@echo ""
+	@echo ":-P done!"
+	@echo ""
+
 # main: $(OBJS) main.o 
 # 	$(CXX) $(INC) $^ -o $@ -w
 # 	@./main

@@ -12,11 +12,13 @@ int main() {
     Filter box5x5("./filter/box5x5.txt");
     Filter sobelx("./filter/sobelx.txt");
     Filter prewittx("./filter/prewittx.txt");
+
     box3x3.apply(img).write("../Output/box_gracehopper.png");
     gaussian3x3.apply(img).write("../Output/gau_gracehopper.png");
     box5x5.apply(img).write("../Output/box5_gracehopper.png");
     sobelx.apply(box3x3.apply(grayScale(img))).write("../Output/sobelx_gracehopper.png");
     prewittx.apply(box3x3.apply(grayScale(img))).write("../Output/prewittx_gracehopper.png");
+
     sobel(grayScale(img)).write("../Output/sobel_gracehopper.png");
     prewitt(grayScale(img)).write("../Output/prewitt_gracehopper.png");
     return 0;
