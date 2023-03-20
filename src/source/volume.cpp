@@ -10,7 +10,7 @@ Volume::Volume(string root_dir) {
     this->root_dir = root_dir;
     this->img_num = 0;
 
-    cout << "reading root dir ... root is: " << root_dir << endl; 
+    // cout << "reading root dir ... root is: " << root_dir << endl; 
     struct dirent *ptr;    
     DIR *dir;
     string PATH = this->root_dir;

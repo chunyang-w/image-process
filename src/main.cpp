@@ -8,7 +8,8 @@ using namespace std;
 
 int main() {
     Volume voxel("../Scans/confuciusornis/");
-    // Image img("../Images/gracehopper.png");
+    // Image img("/Users/cw1722/Documents/Imperial/ap_cw2/Scans/confuciusornis/confuYZ0249.png");
+    // img.printSize();
     // Filter box3x3("./filter/box3x3.txt");
     // Filter gaussian3x3("./filter/gaussian3x3.txt");
     // Filter box5x5("./filter/box5x5.txt");
