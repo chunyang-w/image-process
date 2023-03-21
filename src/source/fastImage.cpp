@@ -10,7 +10,7 @@ FImage::FImage(string path) {
     // Read in image file
     img = stbi_load(path.c_str(), &w, &h, &c, 0);
     if (img != NULL) {
-        cout << "Image loaded with size " << w << " x " << h << " with " << c << " channel(s)." << std::endl; 
+        // cout << "Image loaded with size " << w << " x " << h << " with " << c << " channel(s)." << std::endl; 
     } else {
         throw runtime_error("open file failed");
     }
@@ -30,6 +30,18 @@ FImage::FImage(int h, int w, int c) {
         *p = 0;
     } 
     this->pixel = ptr;
+}
+
+FImage::FImage(const FImage & old_obj): width(old_obj.width), height(old_obj.height), channel(old_obj.channel)
+{
+    unsigned char * old_ptr = old_obj.pixel;
+    int num_pixel = old_obj.width*old_obj.height*old_obj.channel;
+    unsigned char * new_ptr = new unsigned char [num_pixel];
+    for (unsigned char * p = new_ptr; p != new_ptr + num_pixel; p ++) {
+        *p = *old_ptr;
+        old_ptr++;  
+    }
+    this->pixel = new_ptr;
 }
 
 FImage::~FImage() {

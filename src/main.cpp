@@ -4,40 +4,49 @@
 # include "fastImage.h"
 # include "filter.h"
 # include "volume.h"
+# include "filter3d.h"
 
 using namespace std;
 
 int main() {
-    FImage fimg("../Images/gracehopper.png");
-    fimg.printSize();
+    Volume voxel("../Scans/confuciusornis/");
+    median3d(voxel, 3);
+    cout << "after gaussian" << endl;
 
-    Image img("../Images/gracehopper.png");
-    img.printSize();
+    // FImage fimg("../Images/gracehopper.png");
+    // FImage copyfimg(fimg);
+    // copyfimg.write("../Images/copy_gracehopper.png");
 
-    FImage fimg2(fimg.height, fimg.width, fimg.channel);
+    // FImage fimg("../Images/gracehopper.png");
+    // fimg.printSize();
 
-    // for (int i = 0; i < img.height; i++) {
-    //     for (int j = 0; j < img.width; j++) {
-    //         for (int k = 0; k < img.channel; k++) {
-    //             // unsigned char fpix = fimg.getPixel(i, j, k);
-    //             // unsigned char pix = img.pixel[i][j][k];
-    //             // if (int(fpix) == int(pix)) {
-    //             //     cout << "failed at " << i << " " << j << " " << k << " | " << int(fpix) << " " << int(pix) << endl;
-    //             //  }
-    //             fimg2.setPixel(i, j, k, fimg.getPixel(i, j, k));
-    //         }
-    //     }
-    // }
+    // Image img("../Images/gracehopper.png");
+    // img.printSize();
 
-    fimg2.write("../Output/fimg2.png");
+    // FImage fimg2(fimg.height, fimg.width, fimg.channel);
 
-    FImage fimg3(fimg.height, fimg.width, fimg.channel);
-    fimg3.write("../Output/fimg3.png");
+    // // for (int i = 0; i < img.height; i++) {
+    // //     for (int j = 0; j < img.width; j++) {
+    // //         for (int k = 0; k < img.channel; k++) {
+    // //             // unsigned char fpix = fimg.getPixel(i, j, k);
+    // //             // unsigned char pix = img.pixel[i][j][k];
+    // //             // if (int(fpix) == int(pix)) {
+    // //             //     cout << "failed at " << i << " " << j << " " << k << " | " << int(fpix) << " " << int(pix) << endl;
+    // //             //  }
+    // //             fimg2.setPixel(i, j, k, fimg.getPixel(i, j, k));
+    // //         }
+    // //     }
+    // // }
 
-    FImage fimg4 = fimg.pad(20);
+    // fimg2.write("../Output/fimg2.png");
 
-    fimg.write("../Output/fimg1.png");
-    fimg4.write("../Output/fimg4.png");
+    // FImage fimg3(fimg.height, fimg.width, fimg.channel);
+    // fimg3.write("../Output/fimg3.png");
+
+    // FImage fimg4 = fimg.pad(20);
+
+    // fimg.write("../Output/fimg1.png");
+    // fimg4.write("../Output/fimg4.png");
 
     cout << "success" << endl;
 

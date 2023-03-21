@@ -1,7 +1,7 @@
 # pragma once
 # include <vector>
 # include <string>
-# include "image.h"
+# include "fastImage.h"
 
 class Volume {
     public:
@@ -9,5 +9,12 @@ class Volume {
 
         std::vector<std::string> files;
         std::string root_dir;
+        
+        std::vector<FImage> data;
+
         Volume(std::string root_dir);
+        // preload all images into memory;
+        void preload();
+        void unload();
+        
 };
