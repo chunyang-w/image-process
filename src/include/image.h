@@ -18,6 +18,8 @@ class Image {
         Image();
         // constructor
         Image(std::string path);
+        // secondary constructor
+        Image(int width, int height, int channels);
         // copy constructor: make deep copy
         Image(const Image & old_obj);
         // deconstructor
@@ -32,6 +34,10 @@ class Image {
         // member function
         // write Image to destination path;
         void write(std::string path);
+
+        // Compare two images for equality
+        bool isEqual(const Image& other) const;
+
         // print Image size;
         void printSize();
         // padding function
