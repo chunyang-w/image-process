@@ -105,6 +105,9 @@ void apply_2d(Image img, string filter_name, string output_path) {
     else {
         cout << "\nInvalid argument - please re-enter filter:\n";
         cin >> filter_name;
+        size_t rootPosition = output_path.find_last_of("/");
+        output_path.erase(rootPosition, output_path.length() - rootPosition);
+        output_path = output_path + "/" + filter_name;
         apply_2d(img, filter_name, output_path);
     }
 
