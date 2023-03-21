@@ -9,18 +9,6 @@
 
 using namespace std;
 
-// Define path names to filter operators
-string sobelx_path = "./filter/sobelx.txt";
-string sobely_path = "./filter/sobely.txt";
-string prewittx_path = "./filter/prewittx.txt";
-string prewitty_path = "./filter/prewitty.txt";
-string scharrx_path = "./filter/scharrx.txt";
-string scharry_path = "./filter/scharry.txt";
-string robertscrossx_path = "./filter/robertscrossx.txt";
-string robertscrossy_path = "./filter/robertscrossy.txt";
-string gaussian5_path = "./filter/gaussian5x5.txt";
-string gaussian7_path = "./filter/gaussian7x7.txt";
-
 
 // Function to find the median of a vector
 template<typename T>
