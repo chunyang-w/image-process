@@ -100,7 +100,7 @@ void apply_2d(Image img, string filter_name, string output_path) {
     else {
         cout << "\nInvalid argument - please re-enter filter:\n";
         cin >> filter_name;
-        apply(img, filter_name, output_path);
+        apply_2d(img, filter_name, output_path);
     }
 
     // Save resultant image
@@ -114,7 +114,7 @@ void apply_2d(Image img, string filter_name, string output_path) {
         cout << "\nWhat filter would you like to apply?\n";
         cin >> filter_name;
         output_path = output_path + "_" + filter_name;
-        apply(res, filter_name, output_path);
+        apply_2d(res, filter_name, output_path);
     }
 }
 
