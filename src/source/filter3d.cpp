@@ -3,6 +3,7 @@
 # include <vector>
 # include <fstream>
 # include <deque>
+# include <cmath>
 # include <sstream>
 # include <math.h>
 # include <algorithm>
@@ -11,42 +12,22 @@
 # include "fastImage.h"
 # include "filter3d.h"
 # include "fastimage.h"
-# include <cmath>
-
-
 
 using namespace std;
-// double generate(int kernel_size, int &kernel){
-//     // double res[kernel_size][kernel_size][kernel_size];
-//     // vector<vector<vector<double>>> res;
 
-//     int x, y, z;
-//     for(int i = 0; i < kernel_size; i++){
-//         for(int j = 0; j < kernel_size; j++){
-//             for(int k = 0; k < kernel_size; k++){
-//                 x = i - (kernel_size-1)/2;
-//                 y = j - (kernel_size-1)/2;
-//                 z = k - (kernel_size-1)/2;
-//                 res[i][j][k] = exp(-(x*x+y*y+z*z)/(2*1*1))/(sqrt(2*3.1415926)*1);
-//             }
-//         }
-//     }
-//     return res;
-// }
-
-
-// double kernel[3][3][3] = {
-//     {{0.0206, 0.0339, 0.0206}, {0.0339, 0.0560, 0.0339}, {0.0206, 0.0339, 0.0206}},
-//     {{0.0339, 0.0560, 0.0339}, {0.0560, 0.0924, 0.0560}, {0.0339, 0.0560, 0.0339}},
-//     {{0.0206, 0.0339, 0.0206}, {0.0339, 0.0560, 0.0339}, {0.0206, 0.0339, 0.0206}}
-// };
-FImage filter_3d(Volume voxel){
-    int kernel_size = 3;
+Volume gaussian3d(Volume voxel, int kernel_size, string dest_path){
+    int count = 1;
     double res = 0;
     int photo_num = 1;
     double kernel[kernel_size][kernel_size][kernel_size];
     int x, y, z;
     double sum_result = 0;
+    int success = mkdir(dest_path.c_str(), S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
+
+    if (success != 0) {
+        cout << "Creat path failed";
+        throw runtime_error("not able to create path");
+    }
     for(int i = 0; i < kernel_size; i++){
         for(int j = 0; j < kernel_size; j++){
             for(int k = 0; k < kernel_size; k++){
@@ -66,7 +47,6 @@ FImage filter_3d(Volume voxel){
         }
     }
 
-    string root_path = "../filter3d_result/result_num";
     deque<FImage> buffer;
     for (int i = 0; i < kernel_size; i++) {
         FImage single_img(voxel.files[i]);
@@ -75,8 +55,7 @@ FImage filter_3d(Volume voxel){
     int padding = (kernel_size-1)/2;
     FImage res_img(voxel.files[0]);
     cout<< voxel.img_num << endl;
-    // for (int o = kernel_size-1; o < voxel.img_num; o++) {
-    for (int o = kernel_size-1; o < 10; o++) {
+    for (int o = kernel_size-1; o < voxel.img_num; o++) {
         cout << o << endl;
         if(o != kernel_size-1){
         buffer.pop_front();
@@ -98,12 +77,16 @@ FImage filter_3d(Volume voxel){
                 }
             }
         }
-        photo_num +=1;
-        string path = root_path + to_string(photo_num) + ".png";
-        res_img.write(path);
+
+        string path_to_write = dest_path + to_string(count) + ".png";
+        count+=1;
+        res_img.write(path_to_write);
+
+        // photo_num +=1;
+        // string path = root_path + to_string(photo_num) + ".png";
     }
-    cout << "here" << endl;
-    return res_img;
+    Volume res_voxel(dest_path);
+    return res_voxel;
 }
 
 

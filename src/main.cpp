@@ -1,16 +1,19 @@
 # include <iostream>
 # include <vector>
 # include "image.h"
-# include "fastImage.h"
 # include "filter.h"
 # include "volume.h"
 # include "projection.h"
 # include "fastImage.h"
 # include "filter3d.h"
-// using namespace std;
+
+using namespace std;
 
 int main() {
     Volume voxel("../Scans/fracture/");
+    // Volume voxel2 = gaussian3d(voxel, 21, "../Output/mini/");
+    Volume voxel2 = median3d(voxel, 5, "../Output/mini/");
+    cout << "voxel2 constructed, size: " << voxel2.img_num << endl;
     // FImage  XY_projection = choose_projection(voxel);
     // XY_projection.write("../Output/YZ_ave_confuciusornis.png");
     // Image max_img = max_projection(voxel);
@@ -42,6 +45,5 @@ int main() {
 
     // sobel(grayScale(img)).write("../Output/sobel_gracehopper.png");
     // prewitt(grayScale(img)).write("../Output/prewitt_gracehopper.png");
-    FImage res = filter_3d(voxel);
     return 0;
 }
