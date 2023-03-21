@@ -5,9 +5,6 @@
 # include "image.h"
 # include "filter.h"
 
-// to do - set file names 
-//       - kernel size invalid statements for gaussian
-
 using namespace std;
 
 void apply_2d(Image img, string filter_name, string output_path) {
@@ -17,9 +14,11 @@ void apply_2d(Image img, string filter_name, string output_path) {
 
     // Option to print out filter options
     if (filter_name == "help") {
+        output_path.resize(output_path.size() - 4); //Remove 'help' from file name
         cout << "\nFilter options:\ngrayscale\ncolour_balance\n";
         cout << "brightness\nhistogram_equalisation\nblur\nedge_detection\n\nPlease enter one of the above:\n";
         cin >> filter_name;
+        output_path = output_path + filter_name;
     }
     // Apply grayscale filter
     if (filter_name == "grayscale") {
