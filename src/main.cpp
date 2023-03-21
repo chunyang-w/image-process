@@ -15,6 +15,12 @@ void apply_2d(Image img, string filter_name, string output_path) {
     string file_type = ".png";
     Image res;
 
+    // Option to print out filter options
+    if (filter_name == "help") {
+        cout << "\nFilter options:\ngrayscale\ncolour_balance\n";
+        cout << "brightness\nhistogram_equalisation\nblur\nedge_detection\n\nPlease enter one of the above:\n";
+        cin >> filter_name;
+    }
     // Apply grayscale filter
     if (filter_name == "grayscale") {
         res = grayScale(img);
@@ -147,7 +153,7 @@ int main() {
     int status = mkdir(output_folder.c_str(), S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
 
     // Let user choose type of image processing
-    cout << "\nWhat filter would you like to apply?\n";
+    cout << "\nWhat filter would you like to apply? (Enter 'help' for a list of options)\n";
     string filter_name, output_path;
     cin >> filter_name;
     output_path = output_folder + "/" + filter_name;
