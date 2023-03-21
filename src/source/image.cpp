@@ -5,6 +5,9 @@
 
 using namespace std;
 
+// Default constructor
+Image::Image() {};
+
 Image::Image(string path) {
     // cout << "constructor called" << endl;
     int w, h, c;
@@ -14,7 +17,7 @@ Image::Image(string path) {
     if (img != NULL) {
         cout << "Image loaded with size " << w << " x " << h << " with " << c << " channel(s)." << std::endl; 
     } else {
-        throw runtime_error("open file failed");
+        throw runtime_error("Open file failed");
     }
     // set width, height and channel number
     this->width = w; this->height = h; this->channel = c;
@@ -90,7 +93,7 @@ void Image::write(string path) {
     if (success == 0) {
         throw runtime_error("writing image failed");
     } else {
-        cout << "writing success" << endl;
+        cout << "Image saved" << endl;
     }
     delete[] img;
 }

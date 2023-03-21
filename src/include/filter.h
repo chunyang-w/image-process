@@ -3,23 +3,23 @@
 # include <vector>
 # include "image.h"
 
-// Color correction filters
+// Colour correction filters
 // Example usage::
 //      Image img = grayScale(img);
 //      img.write(string path);
 Image grayScale(Image img);
-Image colorBalance(Image img);
+Image colourBalance(Image img);
 Image Brightness(Image img);
 Image Brightness(Image img, int brightness);
 Image histogramEqualisation(Image img);
 
 
 // Image blur filters
-Image imageBlur(Image img, char* method, int kernel_size);
+Image imageBlur(Image img, int method, int kernel_size);
 
 
 // Edge-detection filters
-Image edgeDetection(Image img, char* method);
+Image edgeDetection(Image img, int method);
 
 
 // Filter class

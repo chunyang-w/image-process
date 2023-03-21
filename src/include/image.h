@@ -14,6 +14,8 @@
 
 class Image {
     public:
+        // default constructor
+        Image();
         // constructor
         Image(std::string path);
         // copy constructor: make deep copy

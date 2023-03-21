@@ -127,7 +127,7 @@ Image grayScale(Image img) {
     return img;
 }
 
-Image colorBalance(Image img) {
+Image colourBalance(Image img) {
 
     // Determine size of for loops
     int max_channel;
@@ -243,15 +243,10 @@ Image Brightness(Image img, int brightness) {
     return img;
 }
 
-Image imageBlur(Image img, char* method, int kernel_size) {
-
-    // Confirm valid method specified
-    if ((method != "median") & (method != "box") & (method != "gaussian")) {
-        cout << "Invalid argument - check method specified\n";
-        return img;}
+Image imageBlur(Image img, int method, int kernel_size) {
 
     // Check if we need to look up gaussian operator
-    else if (method == "gaussian") {
+    if (method == 3) {
 
         string path;
         if (kernel_size == 5) {
@@ -267,11 +262,6 @@ Image imageBlur(Image img, char* method, int kernel_size) {
         return res_img;}
 
     else {
-
-        // Check for suitable kernel size
-        if (kernel_size%2 != 1) {
-        cout << "Invalid argument - kernel size must be odd number\n";
-        return img;}
 
         // Pad image to allow calculation at edges
         int padding_size = floor((kernel_size) / 2);
@@ -295,9 +285,9 @@ Image imageBlur(Image img, char* method, int kernel_size) {
                     }
 
                     // Take median or mean depending on method specified
-                    if (method == "median") {
+                    if (method == 1) {
                         res_img.pixel[i][j][k] = median(values);}
-                    else if (method == "box") {
+                    else if (method == 2) {
                         res_img.pixel[i][j][k] = sum/(kernel_size*kernel_size);
                     }
                 }
@@ -307,7 +297,7 @@ Image imageBlur(Image img, char* method, int kernel_size) {
     }
 }
 
-Image edgeDetection(Image img, char* method) {
+Image edgeDetection(Image img, int method) {
 
     // Convert image to grayscale before any edge detection
     img = grayScale(img);
@@ -316,25 +306,21 @@ Image edgeDetection(Image img, char* method) {
     string y_path;
     
     // Choose operator
-    if (method == "sobel") {
+    if (method == 1) {
         x_path = sobelx_path;
         y_path = sobely_path; 
-
-    } else if (method == "prewitt") {
+    }
+    else if (method == 2) {
         x_path = prewittx_path;
         y_path = prewitty_path; 
-
-    } else if (method == "scharr") {
+    }
+    else if (method == 3) {
         x_path = scharrx_path;
         y_path = scharry_path; 
-
-    } else if (method == "roberts_cross") {
+    } 
+    else if (method == 4) {
         x_path = robertscrossx_path;
         y_path = robertscrossy_path; 
-
-    } else {
-        cout << "Invalid argument - check operator specified\n";
-        return img;
     } 
 
     // Convolve image with operator
@@ -360,7 +346,7 @@ Image edgeDetection(Image img, char* method) {
     return res;
 }
 
- // Histogram equalization filter for color images
+ // Histogram equalization filter for colour images
 Image histogramEqualisation(Image img) {
     Image res(img);
 
