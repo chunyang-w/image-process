@@ -5,20 +5,25 @@
 # include "filter.h"
 # include "volume.h"
 # include "projection.h"
+# include "fastImage.h"
 // using namespace std;
 
 int main() {
     // Volume voxel("../Scans/fracture/");
     // Image max_img = max_projection(voxel);
     // max_img.write("../Output/max_fracture.png");
-    Volume voxel("../Scans/confuciusornis/");
+    Volume voxel("../Scans/fracture/");
     // // cout << "Here" << endl;
     // Image max_img = max_projection(voxel);
     // Image min_img = min_projection(voxel);
-    Image ave_img = Z_projection(voxel);
+    // FImage ave_img = Z_projection(voxel);
+    // FImage ave_img = Z_projection(voxel);
+    FImage  XZ_projection = choose_projection(voxel);
     // max_img.write("../Output/max_confuciusornis.png");
     // min_img.write("../Output/min_confuciusornis.png");
-    ave_img.write("../Output/ave_confuciusornis.png");
+    // ave_img.write("../Output/ave_confuciusornis.png");
+    // ave_img.write("../Output/ave_confuciusornis.png");
+    XZ_projection.write("../Output/YZ_ave_fracture.png");
     // Image img("/Users/cw1722/Documents/Imperial/ap_cw2/Scans/confuciusornis/confuYZ0249.png");
     // img.printSize();
     // Filter box3x3("./filter/box3x3.txt");

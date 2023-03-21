@@ -10,7 +10,7 @@ FImage::FImage(string path) {
     // Read in image file
     img = stbi_load(path.c_str(), &w, &h, &c, 0);
     if (img != NULL) {
-        cout << "Image loaded with size " << w << " x " << h << " with " << c << " channel(s)." << std::endl; 
+        // cout << "Image loaded with size " << w << " x " << h << " with " << c << " channel(s)." << std::endl; 
     } else {
         throw runtime_error("open file failed");
     }
