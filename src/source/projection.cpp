@@ -137,19 +137,48 @@ FImage choose_projection(Volume voxel) {
     int plane;
     cin >> plane;
     int length;
+    vector<vector<vector<int>>> init_pixel;
     FImage example_img(voxel.files[0]);
     if(plane == 1){
         FImage res_img(voxel.files[0]);
         length = voxel.img_num;
+        init_pixel.resize(example_img.height);
+        for (int i = 0; i < example_img.height; i++) {
+            init_pixel[i].resize(example_img.width);
+        }
+        for (int i = 0; i < example_img.height; i++) {
+            for (int j = 0; j < example_img.width; j++) {
+                init_pixel[i][j].resize(example_img.channel);
+            }
+        }
     }
     else if(plane == 2){
         FImage res_img(example_img.height, voxel.img_num, example_img.channel);
         length = example_img.width;
+        init_pixel.resize(example_img.height);
+        for (int i = 0; i < example_img.height; i++) {
+            init_pixel[i].resize(voxel.img_num);
+        }
+        for (int i = 0; i < example_img.height; i++) {
+            for (int j = 0; j < voxel.img_num; j++) {
+                init_pixel[i][j].resize(example_img.channel);
+            }
+        }
     }
     else if(plane == 3){
         FImage res_img(voxel.img_num, example_img.width, example_img.channel);
         length = example_img.height;
+        init_pixel.resize(voxel.img_num);
+        for (int i = 0; i < voxel.img_num; i++) {
+            init_pixel[i].resize(example_img.width);
+        }
+        for (int i = 0; i < voxel.img_num; i++) {
+            for (int j = 0; j < example_img.width; j++) {
+                init_pixel[i][j].resize(example_img.channel);
+            }
+        }
     }
+    vector<vector<vector<int>>> total_pixel = init_pixel;
     int w, h, c;
     FImage res_img(voxel.files[0]);
     for (int m = 1; m < voxel.img_num; m++) {
@@ -184,9 +213,14 @@ FImage choose_projection(Volume voxel) {
                         }
                     }
                     else if (method == 3) {
-                        res_img.setPixel(w, h, c, res_img.getPixel(w, h, c) + current_pixel);
+                        if (m == 1) {
+                            total_pixel[w][h][c] = example_img.getPixel(w, h, c) + current_pixel;
+                        }
+                        else {
+                            total_pixel[w][h][c] = total_pixel[w][h][c] + current_pixel;
+                        }
                         if(m == voxel.img_num - 1) {
-                            res_img.setPixel(w, h, c, res_img.getPixel(w, h, c) / length);
+                            res_img.setPixel(w, h, c, total_pixel[w][h][c] / length);
                         }
                     }
                 }
