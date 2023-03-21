@@ -15,8 +15,10 @@
 class FImage {
     public:
         // constructor
+        FImage(){}
         FImage(std::string path);
         FImage(int h, int w, int c);
+        FImage(const FImage &old_obj);
         // // copy constructor: make deep copy
         // FImage(const FImage & old_obj);
         // deconstructor

@@ -28,3 +28,13 @@ Volume::Volume(string root_dir) {
     sort(this->files.begin(), this->files.end());
     closedir(dir);
 }
+
+void Volume::preload() {
+    for (int i = 0; i < this->img_num; i++) {
+        this->data.push_back(FImage(this->files[i]));
+    }
+}
+
+void Volume::unload() {
+    this->data.resize(0);
+}
