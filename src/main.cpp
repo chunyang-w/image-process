@@ -5,10 +5,12 @@
 # include "image.h"
 # include "filter.h"
 
+// to do - set file names 
+//       - kernel size invalid statements for gaussian
 
 using namespace std;
 
-void apply(Image img, string filter_name, string output_path) {
+void apply_2d(Image img, string filter_name, string output_path) {
 
     string file_type = ".png";
     Image res;
@@ -68,7 +70,7 @@ void apply(Image img, string filter_name, string output_path) {
             cout << "\nInvalid argument - kernel size must be odd number, please re-enter:\n";}
             else {accepted = true;}
         }
-
+        output_path = output_path + "_" + strmethod + to_string(size);
         res = imageBlur(img, method, size);
     }
     // Apply edge detection
@@ -91,6 +93,7 @@ void apply(Image img, string filter_name, string output_path) {
             accepted = true;}
             else {cout << "\nInvalid argument - please re-enter method:\n";};
         }
+        output_path = output_path + "_" + strmethod;
         res = edgeDetection(img, method);
     }
     // Rerun process if filter name specified was invalid
@@ -148,30 +151,9 @@ int main() {
     string filter_name, output_path;
     cin >> filter_name;
     output_path = output_folder + "/" + filter_name;
-    apply(img, filter_name, output_path);
+    apply_2d(img, filter_name, output_path);
 
     cout << "\nThanks for using the Monte-Carlo filtering tool!\n";
 
-    // Filter box3x3("./filter/box3x3.txt");
-    // Filter gaussian3x3("./filter/gaussian3x3.txt");
-    // Filter box5x5("./filter/box5x5.txt");
-    // Filter sobelx("./filter/sobelx.txt");
-    // Filter prewittx("./filter/prewittx.txt");
-    // box3x3.apply(img).write("../Output/box_gracehopper.png");
-    // gaussian3x3.apply(img).write("../Output/gau_gracehopper.png");
-    // box5x5.apply(img).write("../Output/box5_gracehopper.png");
-    // sobelx.apply(box3x3.apply(grayScale(img))).write("../Output/sobelx_gracehopper.png");
-    // prewittx.apply(box3x3.apply(grayScale(img))).write("../Output/prewittx_gracehopper.png");
-    // sobel(grayScale(img)).write("../Output/sobel_gracehopper.png");
-    // prewitt(grayScale(img)).write("../Output/prewitt_gracehopper.png"); 
-    // edgeDetection(grayScale(img)).write("../Output/sobel_gracehopper.png"); 
-    // edgeDetection(grayScale(img), "sobel").write("../Output/sobel_gracehopper.png"); 
-    // edgeDetection(grayScale(img), "scharr").write("../Output/scharr_gracehopper.png"); 
-    // edgeDetection(img, "prewitt").write("../Output/prewitt_gracehopper.png"); 
-    // edgeDetection(img, "roberts_cross").write("../Output/roberts_cross_gracehopper.png"); 
-    // imageBlur(img, "gaussian", 7).write("../Output/gaussian7_gracehopper.png"); 
-    // imageBlur(img, "median", 3).write("../Output/median3_gracehopper.png"); 
-    // imageBlur(img, "box", 5).write("../Output/box5_gracehopper.png"); 
-    // imageBlur(img, "boox", 5).write("../Output/typo_gracehopper.png"); 
     return 0;
 }
