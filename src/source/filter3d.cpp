@@ -5,11 +5,13 @@
 # include <deque>
 # include <sstream>
 # include <math.h>
+# include <algorithm>
+# include <sys/stat.h>
+# include "volume.h"
+# include "fastImage.h"
 # include "filter3d.h"
 # include "fastimage.h"
 # include <cmath>
-# include <map>
-# include <algorithm>
 
 
 
@@ -127,8 +129,15 @@ FImage getMedian(deque<FImage> &buffer, int kernel_size, int h, int w, int c) {
     return res;
 }
 
-Volume median3d(Volume voxel, int kernel_size) {
+// read voxel and return a voxel
+Volume median3d(Volume voxel, int kernel_size, string dest_path) {
     cout << "in gaussian3d" << endl;
+    int count = 1;
+    int success = mkdir(dest_path.c_str(), S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
+    if (success != 0) {
+        cout << "Creat path failed";
+        throw runtime_error("not able to create path");
+    }
     int h, w, c;
     int padding = (kernel_size - 1) / 2;
     if (voxel.img_num > 0) {
@@ -150,8 +159,10 @@ Volume median3d(Volume voxel, int kernel_size) {
         }
         // cout << "done" << endl;
         // write image
-        string path_to_write = "../Output/con" + to_string(i) + ".png";
+        string path_to_write = dest_path + to_string(count) + ".png";
+        count+=1;
         img.write(path_to_write);
     }
-    return voxel;
+    Volume res_voxel(dest_path);
+    return res_voxel;
 }
