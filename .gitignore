@@ -3,6 +3,8 @@
 Scans/confuciusornis/*
 Scans/fracture/*
 Output/*
+con_filter3d_result/*
+filter3d_result/*
 
 # Prerequisites
 *.d
