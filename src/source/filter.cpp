@@ -201,7 +201,7 @@ Image Brightness(Image img) {
 
     // Adjust each pixel by the difference between the default value (128) and the channel's average 
     for (int k = 0; k < max_channel; k++) {
-        int diff = (128 - channel_avg[k]) / num_pixel;
+        int diff = 128 - (channel_avg[k]/num_pixel);
         for (int i = 0; i < img.height; i++) {
             for (int j = 0; j < img.width; j++) {
                 int sum = 0;
