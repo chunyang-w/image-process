@@ -4,6 +4,7 @@
 # include <fstream>
 # include <sstream>
 # include <math.h>
+# include <cmath>
 # include "filter.h"
 
 using namespace std;
@@ -35,32 +36,88 @@ T median(vector<T>& vec) {
             }
         }
     }
-    
     // Return median
     return vec[middle];
 }
 
+// To initialise gaussian operator
+Filter::Filter(int kernel_size) {
+    double sigma = 1.0;
+    double sum = 0.0;
 
-
-Filter::Filter(string path) {
-
-    // Read in operator from text file
-    fstream f;
-    f.open(path);
-    string line;
-    while(getline(f, line)) {
+    for (int i = -kernel_size/2; i <= kernel_size/2; i++) {
         vector<double> temp;
-        double num;
-        stringstream stream(line);
-        while(stream >> num) {
-            temp.push_back(num);
+        for (int j = -kernel_size/2; j <= kernel_size/2; j++) {
+            double val = exp(-(i*i + j*j) / (2 * sigma*sigma));
+            temp.push_back(val);
+            sum += val;
         }
         this->kernel.push_back(temp);
     }
+    // Normalize the kernel
+    for (int i = 0; i < kernel_size; i++) {
+        for (int j = 0; j < kernel_size; j++) {
+            this->kernel[i][j] /= sum;
+        }
+    }  
+    this->kernel_size = this->kernel.size();
+    this->padding_size = floor((this->kernel_size) / 2); 
+}
 
+// To initialise edge detection operators
+Filter::Filter(char* optr) {
+
+    if (optr == "prewittx") {
+        this->kernel = {
+            {1, 0, -1},
+            {1, 0, -1},
+            {1, 0, -1}
+        };
+    } else if (optr == "prewitty") {
+        this->kernel = {
+            {1, 1, 1},
+            {0, 0, 0},
+            {-1, -1, -1}
+        };
+    } else if (optr == "scharrx") {
+        this->kernel = {
+            {3, 0, -3},
+            {10, 0, -10},
+            {3, 0, -3}
+        };
+    } else if (optr == "scharry") {
+        this->kernel = {
+            {3, 10, 3},
+            {0, 0, 0},
+            {-3, -10, -3}
+        };
+    } else if (optr == "sobelx") {
+        this->kernel = {
+            {1, 0, -1},
+            {12, 0, -2},
+            {1, 0, -1}
+        };
+    } else if (optr == "sobely") {
+        this->kernel = {
+            {1, 2, 1},
+            {0, 0, 0},
+            {-1, -2, -1}
+        };
+    } else if (optr == "robertscrossx") {
+        this->kernel = {
+            {1, 0},
+            {0, -1}
+        };
+    } else if (optr == "robertscrossy") {
+        this->kernel = {
+            {0, 1},
+            {-1, 0}
+        };
+    }
     this->kernel_size = this->kernel.size();
     this->padding_size = floor((this->kernel_size) / 2);
 }
+
 
 Image Filter::apply(Image img) {
 
@@ -248,15 +305,8 @@ Image imageBlur(Image img, int method, int kernel_size) {
     // Check if we need to look up gaussian operator
     if (method == 3) {
 
-        string path;
-        if (kernel_size == 5) {
-            path = gaussian5_path;
-        } else if (kernel_size == 7) {
-            path = gaussian7_path;
-        } else {cout << "Gaussian blur not possible with specified kernel size \n";}
-        
         // Convolve gaussian operator with image
-        Filter gaussian(path.c_str());
+        Filter gaussian(kernel_size);
         Image res_img = gaussian.apply(img);
 
         return res_img;}
@@ -302,30 +352,30 @@ Image edgeDetection(Image img, int method) {
     // Convert image to grayscale before any edge detection
     img = grayScale(img);
 
-    string x_path;
-    string y_path;
+    char* optr_x;
+    char* optr_y;
     
     // Choose operator
     if (method == 1) {
-        x_path = sobelx_path;
-        y_path = sobely_path; 
+        optr_x = "sobelx";
+        optr_y = "sobely";
     }
     else if (method == 2) {
-        x_path = prewittx_path;
-        y_path = prewitty_path; 
+        optr_x = "prewittx";
+        optr_y = "prewitty";
     }
     else if (method == 3) {
-        x_path = scharrx_path;
-        y_path = scharry_path; 
+        optr_x = "scharrx";
+        optr_y = "scharry";
     } 
     else if (method == 4) {
-        x_path = robertscrossx_path;
-        y_path = robertscrossy_path; 
+        optr_x = "robertscrossx";
+        optr_y = "robertscrossy";
     } 
 
     // Convolve image with operator
-    Filter edge_x(x_path.c_str());
-    Filter edge_y(y_path.c_str());
+    Filter edge_x(optr_x);
+    Filter edge_y(optr_y);
 
     Image x = edge_x.apply(img);
     Image y = edge_y.apply(img);
@@ -342,7 +392,6 @@ Image edgeDetection(Image img, int method) {
             }
         }
     } 
-
     return res;
 }
 

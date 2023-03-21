@@ -28,8 +28,12 @@ Image edgeDetection(Image img, int method);
 //      myNxNfilter.apply(img);
 class Filter {
     public:
-        // constructor:
-        Filter(std::string kernel_path);
+
+        // Edge detection constructor:
+        Filter(char* optr);
+
+        // Gaussian contructor
+        Filter(int kernel_size);
 
         // kernel container
         int kernel_size;
