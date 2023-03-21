@@ -32,6 +32,18 @@ FImage::FImage(int h, int w, int c) {
     this->pixel = ptr;
 }
 
+FImage::FImage(const FImage & old_obj): width(old_obj.width), height(old_obj.height), channel(old_obj.channel)
+{
+    unsigned char * old_ptr = old_obj.pixel;
+    int num_pixel = old_obj.width*old_obj.height*old_obj.channel;
+    unsigned char * new_ptr = new unsigned char [num_pixel];
+    for (unsigned char * p = new_ptr; p != new_ptr + num_pixel; p ++) {
+        *p = *old_ptr;
+        old_ptr++;  
+    }
+    this->pixel = new_ptr;
+}
+
 FImage::~FImage() {
     // cout << "deconstructor called" << endl;
     stbi_image_free(this->pixel);
