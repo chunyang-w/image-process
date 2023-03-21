@@ -2,6 +2,7 @@
 # include <string>
 # include <iostream>
 # include <algorithm>
+# include <sys/stat.h>
 # include "volume.h"
 # include "fastImage.h"
 # include "filter3d.h"
@@ -30,8 +31,15 @@ FImage getMedian(deque<FImage> &buffer, int kernel_size, int h, int w, int c) {
     return res;
 }
 
-Volume median3d(Volume voxel, int kernel_size) {
+// read voxel and return a voxel
+Volume median3d(Volume voxel, int kernel_size, string dest_path) {
     cout << "in gaussian3d" << endl;
+    int count = 1;
+    int success = mkdir(dest_path.c_str(), S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
+    if (success != 0) {
+        cout << "Creat path failed";
+        throw runtime_error("not able to create path");
+    }
     int h, w, c;
     int padding = (kernel_size - 1) / 2;
     if (voxel.img_num > 0) {
@@ -53,47 +61,10 @@ Volume median3d(Volume voxel, int kernel_size) {
         }
         // cout << "done" << endl;
         // write image
-        string path_to_write = "../Output/con" + to_string(i) + ".png";
+        string path_to_write = dest_path + to_string(count) + ".png";
+        count+=1;
         img.write(path_to_write);
     }
-    return voxel;
+    Volume res_voxel(dest_path);
+    return res_voxel;
 }
-
-// Volume median3d(Volume voxel, int kernel_size) {
-//     cout << "in gaussian3d" << endl;
-//     int h, w, c;
-//     int padding = (kernel_size - 1) / 2;
-//     if (voxel.img_num > 0) {
-//         FImage temp(voxel.files[0]);
-//         h = temp.height; w = temp.width; c = temp.channel;
-//     } else {
-//         cout << "This Volume do not contain any images" << endl;
-//         return voxel;
-//     }
-//     voxel.preload();
-//     cout << "preload complete" << endl;
-
-//     for (int x = padding; x < voxel.img_num - padding; x++) {
-//         FImage res(h-(padding*2), (w-padding*2), c);
-//         for (int i = 0; i < res.height; i++) {
-//             for (int j = 0; j < res.width; j++) {
-//                 for (int k = 0; k < res.channel; k++) {
-//                     vector<uint8_t> temp;
-//                     for (int l = i; l < i+kernel_size; l++) {
-//                         for (int m = j; m < j+kernel_size; m++) {
-//                             for (int n = x-padding; n <= x+padding; n++) {
-//                                 temp.push_back(voxel.data[n].getPixel(l, m, k));
-//                             }
-//                         }
-//                     }
-//                     sort(temp.begin(), temp.end());
-//                     res.setPixel(i, j, k, temp[temp.size()-1]);
-//                 }
-//             }
-//         }
-//         cout << "Fimage constructed" << endl;
-//     }
-
-//     voxel.unload();
-//     return voxel;
-// }

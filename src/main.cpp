@@ -9,9 +9,9 @@
 using namespace std;
 
 int main() {
-    Volume voxel("../Scans/confuciusornis/");
-    median3d(voxel, 3);
-    cout << "after gaussian" << endl;
+    Volume voxel("../Scans/con_mini/");
+    Volume voxel2 = median3d(voxel, 3, "../Output/con_mini/");
+    cout << "**" << voxel2.img_num << endl;
 
     // FImage fimg("../Images/gracehopper.png");
     // FImage copyfimg(fimg);
