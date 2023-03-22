@@ -45,6 +45,23 @@ demo: ./io-demo/minimal.cpp
 	$(CXX) $(INC) $^ -o $@  -w
 	@./demo
 
+test: test.o $(INPUTS)
+	$(CXX) $(INC) $^ -o $@ -w
+
+test.o: test.cpp
+	$(CXX) $(INC) -c $^ -o $@ -w
+
+.PHONY: runtest
+runtest:
+	@make clean
+	@make
+	@echo ""
+	@echo "======= RUNNING PROGRAM ======="
+	@echo ""
+	@./test
+	@echo ""
+	@echo "======= RUNNING FINISH ======="
+
 .PHONY: run
 run:
 	@make clean

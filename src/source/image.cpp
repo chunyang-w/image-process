@@ -1,7 +1,7 @@
-#define STB_IMAGE_WRITE_IMPLEMENTATION
-#define STB_IMAGE_IMPLEMENTATION
-#include "image.h"
-#include <fstream>
+# define STB_IMAGE_WRITE_IMPLEMENTATION
+# define STB_IMAGE_IMPLEMENTATION
+# include "image.h"
+# include <fstream>
 
 using namespace std;
 

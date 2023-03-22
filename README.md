@@ -8,6 +8,7 @@
 + Complie program: `make`
 + Clean objective files: `make clean`
 + Run minimal demo: `make demo`
++ Run unit test: `make runtest`
 
 (if you wish to use  g++)
 + run `make run -f makefile_g++`
