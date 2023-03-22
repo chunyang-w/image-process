@@ -6,13 +6,13 @@
 # include <cmath>
 # include <sstream>
 # include <math.h>
-# include <algorithm>
 # include <sys/stat.h>
 # include <filesystem>
+# include "helper.h"
 # include "volume.h"
 # include "fastImage.h"
 # include "filter3d.h"
-# include "fastimage.h"
+# include "fastImage.h"
 
 using namespace std;
 
@@ -82,9 +82,6 @@ Volume gaussian3d(Volume voxel, int kernel_size, string dest_path){
         string path_to_write = dest_path + to_string(count) + ".png";
         count+=1;
         res_img.write(path_to_write);
-
-        // photo_num +=1;
-        // string path = root_path + to_string(photo_num) + ".png";
     }
     Volume res_voxel(dest_path);
     return res_voxel;
@@ -97,16 +94,22 @@ FImage getMedian(deque<FImage> &buffer, int kernel_size, int h, int w, int c) {
     for (int i = 0; i < res.height; i++) {
         for (int j = 0; j < res.width; j++) {
             for (int k = 0; k < res.channel; k++) {
-                vector<uint8_t> temp;
+                int count = 0;
+                int size = kernel_size*kernel_size*kernel_size;
+                uint8_t temp[size];
                 for (int l = i; l < i+kernel_size; l++) {
                     for (int m = j; m < j+kernel_size; m++) {
                         for (int n = 0; n < buffer.size(); n++) {
-                            temp.push_back(buffer[n].getPixel(l, m, k));
+                            temp[count] = buffer[n].getPixel(l, m, k);
+                            // temp2.push_back(buffer[n].getPixel(l, m, k));
+                            count++;
                         }
                     }
                 }
-                sort(temp.begin(), temp.end());
-                res.setPixel(i, j, k, temp[temp.size()-1]);
+                quickSort(temp, 0, size-1);
+                int mid = size / 2;
+
+                res.setPixel(i, j, k, temp[mid]);
             }
         }
     }
@@ -149,9 +152,7 @@ Volume median3d(Volume voxel, int kernel_size, string dest_path) {
             buffer.pop_front();
             buffer.push_back(voxel.files[i + padding]);
         }
-        // cout << "done" << endl;
-        // write image
-        string path_to_write = dest_path + to_string(count) + ".png";
+        string path_to_write = dest_path + num2string(count) + ".png";
         count+=1;
         img.write(path_to_write);
     }
