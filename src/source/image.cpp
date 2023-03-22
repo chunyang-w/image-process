@@ -5,6 +5,9 @@
 
 using namespace std;
 
+// Default constructor
+Image::Image() {};
+
 Image::Image(string path) {
     // cout << "constructor called" << endl;
     int w, h, c;
@@ -14,7 +17,7 @@ Image::Image(string path) {
     if (img != NULL) {
         cout << "Image loaded with size " << w << " x " << h << " with " << c << " channel(s)." << std::endl; 
     } else {
-        throw runtime_error("open file failed");
+        throw runtime_error("Open file failed");
     }
     // set width, height and channel number
     this->width = w; this->height = h; this->channel = c;
@@ -90,7 +93,7 @@ void Image::write(string path) {
     if (success == 0) {
         throw runtime_error("writing image failed");
     } else {
-        cout << "writing success" << endl;
+        cout << "Image saved" << endl;
     }
     delete[] img;
 }
@@ -133,4 +136,40 @@ Image Image::pad(int padding) {
         }
     }
     return new_img;
+}
+
+Image::Image(int w, int h, int c) {
+    this->width = w;
+    this->height = h;
+    this->channel = c;
+
+    // Initialize the 3-D pixel vector
+    this->pixel.resize(h);
+    for (int i = 0; i < h; i++) {
+        this->pixel[i].resize(w);
+    }
+    for (int i = 0; i < h; i++) {
+        for (int j = 0; j < w; j++) {
+            this->pixel[i][j].resize(c);
+        }
+    }
+}
+
+// Compare two images
+bool Image::isEqual(const Image& other) const {
+    if (width != other.width || height != other.height || channel != other.channel) {
+        return false;
+    }
+
+    for (int i = 0; i < height; i++) {
+        for (int j = 0; j < width; j++) {
+            for (int k = 0; k < channel; k++) {
+                if (pixel[i][j][k] != other.pixel[i][j][k]) {
+                    return false;
+                }
+            }
+        }
+    }
+
+    return true;
 }
