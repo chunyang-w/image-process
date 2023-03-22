@@ -10,5 +10,5 @@
 using namespace std;
 
 int main() {
-
+    cout << "in test.cpp" << endl;
 }
