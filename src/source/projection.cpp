@@ -5,7 +5,7 @@
 # include <sstream>
 # include <math.h>
 # include "projection.h"
-# include "fastimage.h"
+# include "fastImage.h"
 
 using namespace std;
 
