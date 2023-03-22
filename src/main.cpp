@@ -1,5 +1,7 @@
 # include <iostream>
 # include <vector>
+# include <string>
+# include <sys/stat.h>
 # include "image.h"
 # include "filter.h"
 # include "volume.h"
@@ -10,43 +12,172 @@
 
 using namespace std;
 
+
+/**
+@brief Applies a 2D image filter to the input image img and saves the output to the specified output_path.
+The user can enter "help" to print available filter options. The user is also given the option to apply
+multiple filters sequentially to the output image (note - the result will be saved after each filter).
+@param img The input image to be filtered
+@param filter_name The name of the filter to be applied
+@param output_path The path where the output image should be saved
+@return None
+*/
+void apply_2d(Image img, string filter_name, string output_path) {
+
+    string file_type = ".png";
+    Image res;
+
+    // Option to print out filter options
+    if (filter_name == "help") {
+        output_path.resize(output_path.size() - 4); //Remove 'help' from file name
+        cout << "\nFilter options:\ngrayscale\ncolour_balance\n";
+        cout << "brightness\nhistogram_equalisation\nblur\nedge_detection\n\nPlease enter one of the above:\n";
+        cin >> filter_name;
+        output_path = output_path + filter_name;
+    }
+    // Apply grayscale filter
+    if (filter_name == "grayscale") {
+        res = grayScale(img);
+    } 
+    // Apply colour balance
+    else if (filter_name == "colour_balance") {
+        res = colourBalance(img);
+    } 
+    // Apply brightness adjustment
+    else if (filter_name == "brightness") {
+
+        cout << "\nSpecify optional brightness value in the range -255 to 255, or enter 0 for automatic adjustment:\n";
+        int strength ;
+        cin >> strength;
+        if (strength == 0) {
+            res = Brightness(img);}
+        else if ((strength > 255) | (strength < -255)) {
+            cout << "Invalid value - performing automatic adjustment instead";
+            res = Brightness(img);}
+        else {
+            res = Brightness(img, strength);
+        }
+    }
+    // Apply histogram equalisation
+    else if (filter_name == "histogram_equalisation") {
+        res = histogramEqualisation(img);
+    }
+    // Apply blur
+    else if (filter_name == "blur") {
+
+        // Allow user to specify blur method
+        cout << "\nSpecify method (median/box/gaussian):\n";
+        bool accepted = false;
+        string strmethod;
+        int method;
+        while (accepted != true) {
+            cin >> strmethod;
+            if (strmethod == "median") {method = 1;
+            accepted = true;}
+            else if (strmethod == "box") {method = 2;
+            accepted = true;}
+            else if (strmethod == "gaussian") {method = 3;
+            accepted = true;}
+            else {cout << "Invalid argument - check method specified\n";};
+        }
+        // Allow user to specify blur kernel size
+        cout << "\nSpecify kernel size:\n";
+        int size;
+        accepted = false;
+        while (accepted != true) {
+            cin >> size;
+            if (size%2 != 1) {
+            cout << "\nInvalid argument - kernel size must be odd number, please re-enter:\n";}
+            else {accepted = true;}
+        }
+        output_path = output_path + "_" + strmethod + to_string(size);
+        res = imageBlur(img, method, size);
+    }
+    // Apply edge detection
+    else if (filter_name == "edge_detection")  {
+
+        // Allow user to specify method
+        cout << "\nSpecify method (sobel/prewitt/scharr/roberts_cross):\n";
+        string strmethod;
+        bool accepted = false;
+        int method;
+        while (accepted != true) {
+            cin >> strmethod;
+            if (strmethod == "sobel") {method = 1;
+            accepted = true;}
+            else if (strmethod == "prewitt") {method = 2;
+            accepted = true;}
+            else if (strmethod == "scharr") {method = 3;
+            accepted = true;}
+            else if (strmethod == "roberts_cross") {method = 4;
+            accepted = true;}
+            else {cout << "\nInvalid argument - please re-enter method:\n";};
+        }
+        output_path = output_path + "_" + strmethod;
+        res = edgeDetection(img, method);
+    }
+    // Rerun process if filter name specified was invalid
+    else {
+        cout << "\nInvalid argument - please re-enter filter:\n";
+        cin >> filter_name;
+        size_t rootPosition = output_path.find_last_of("/");
+        output_path.erase(rootPosition, output_path.length() - rootPosition);
+        output_path = output_path + "/" + filter_name;
+        apply_2d(img, filter_name, output_path);
+    }
+
+    // Save resultant image
+    res.write(output_path + file_type);
+
+    // Check if the user wants to apply an additional filter on top of their output
+    string again;
+    cout << "\nWould you like to apply another filter on top of this? (Y/N)\n";
+    cin >> again;
+    if ((again == "Y") | (again == "y") |(again == "Yes") | (again == "yes")) {
+        cout << "\nWhat filter would you like to apply?\n";
+        cin >> filter_name;
+        output_path = output_path + "_" + filter_name;
+        apply_2d(res, filter_name, output_path);
+    }
+}
+
 int main() {
 
-    Volume voxel("../Scans/fracture/");
-    Volume voxel2 = slice(voxel, 0, 100, 2, "../Output/slice_frac/");
-    // Volume voxel2 = gaussian3d(voxel, 21, "../Output/mini/");
-    // Volume voxel2 = median3d(voxel, 3, "../Output/mini/");
-    // cout << "voxel2 constructed, size: " << voxel2.img_num << endl;
-    // FImage  XY_projection = choose_projection(voxel);
-    // XY_projection.write("../Output/YZ_ave_confuciusornis.png");
-    // Image max_img = max_projection(voxel);
-    // max_img.write("../Output/max_fracture.png");
-    // Volume voxel("../Scans/fracture/");
-    // // cout << "Here" << endl;
-    // Image max_img = max_projection(voxel);
-    // Image min_img = min_projection(voxel);
-    // FImage ave_img = Z_projection(voxel);
-    // FImage ave_img = Z_projection(voxel);
-    // max_img.write("../Output/max_confuciusornis.png");
-    // min_img.write("../Output/min_confuciusornis.png");
+    // Let user choose image to be processed
+    cout << "Enter name of image to process (e.g. 'gracehopper.png' - ensure this image is saved in the 'Images' folder) \n";
+    string image_name, image_path;
+    Image img;
+    bool imported = false;
+    while (imported == false) {
+        try {
+            cin >> image_name;
+            image_path = "../Images/" + image_name;
+            Image new_img(image_path);
+            img = new_img;
+            imported = true;}
+        catch (runtime_error) {
+            cout << "No image found, please re-enter name:\n";
+        }
+    } 
 
-    // ave_img.write("../Output/ave_confuciusornis.png");
-    // XZ_projection.write("../Output/YZ_ave_fracture.png");
-    // Image img("/Users/cw1722/Documents/Imperial/ap_cw2/Scans/confuciusornis/confuYZ0249.png");
-    // img.printSize();
-    // Filter box3x3("./filter/box3x3.txt");
-    // Filter gaussian3x3("./filter/gaussian3x3.txt");
-    // Filter box5x5("./filter/box5x5.txt");
-    // Filter sobelx("./filter/sobelx.txt");
-    // Filter prewittx("./filter/prewittx.txt");
+    // Ensure correct output folder exists, and if not create it
+    string output_folder;
+    size_t dotPosition = image_name.find_last_of(".");
+    if (dotPosition != string::npos) {
+        image_name.erase(dotPosition, image_name.length() - dotPosition);
+    }
+    output_folder = "../Output/" + image_name;
+    int status = mkdir(output_folder.c_str(), S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
 
-    // box3x3.apply(img).write("../Output/box_gracehopper.png");
-    // gaussian3x3.apply(img).write("../Output/gau_gracehopper.png");
-    // box5x5.apply(img).write("../Output/box5_gracehopper.png");
-    // sobelx.apply(box3x3.apply(grayScale(img))).write("../Output/sobelx_gracehopper.png");
-    // prewittx.apply(box3x3.apply(grayScale(img))).write("../Output/prewittx_gracehopper.png");
+    // Let user choose type of image processing
+    cout << "\nWhat filter would you like to apply? (Enter 'help' for a list of options)\n";
+    string filter_name, output_path;
+    cin >> filter_name;
+    output_path = output_folder + "/" + filter_name;
+    apply_2d(img, filter_name, output_path);
 
-    // sobel(grayScale(img)).write("../Output/sobel_gracehopper.png");
-    // prewitt(grayScale(img)).write("../Output/prewitt_gracehopper.png");
+    cout << "\nThanks for using the Monte-Carlo filtering tool!\n";
+
+
     return 0;
 }

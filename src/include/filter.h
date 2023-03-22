@@ -3,20 +3,24 @@
 # include <vector>
 # include "image.h"
 
-// std::string sobelx_path = "./filter/sobelx.txt";
-// std::string sobely_path = "./filter/sobely.txt";
-
-// Color correction filters
+// Colour correction filters
 // Example usage::
 //      Image img = grayScale(img);
 //      img.write(string path);
 Image grayScale(Image img);
-Image colorBalance(Image img);
+Image colourBalance(Image img);
+Image Brightness(Image img);
+Image Brightness(Image img, int brightness);
+Image histogramEqualisation(Image img);
+
+
+// Image blur filters
+Image imageBlur(Image img, int method, int kernel_size);
 
 
 // Edge-detection filters
-Image sobel(Image img);
-Image prewitt(Image img);
+Image edgeDetection(Image img, int method);
+
 
 // Filter class
 // Example usage
@@ -24,8 +28,12 @@ Image prewitt(Image img);
 //      myNxNfilter.apply(img);
 class Filter {
     public:
-        // constructor:
-        Filter(std::string kernel_path);
+
+        // Edge detection constructor:
+        Filter(char* optr);
+
+        // Gaussian contructor
+        Filter(int kernel_size);
 
         // kernel container
         int kernel_size;
@@ -36,3 +44,5 @@ class Filter {
 
 };
 
+// Function to apply filter
+void apply_2d(Image img, char* filter_name, char* output_path);
