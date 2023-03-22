@@ -4,6 +4,11 @@
 # include <sys/stat.h>
 # include "image.h"
 # include "filter.h"
+# include "volume.h"
+# include "projection.h"
+# include "fastImage.h"
+# include "filter3d.h"
+# include "slice.h"
 
 using namespace std;
 
@@ -172,6 +177,7 @@ int main() {
     apply_2d(img, filter_name, output_path);
 
     cout << "\nThanks for using the Monte-Carlo filtering tool!\n";
+
 
     return 0;
 }
