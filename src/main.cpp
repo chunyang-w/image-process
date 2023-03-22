@@ -8,6 +8,7 @@
 # include "filter3d.h"
 # include <cassert>
 # include <random>
+# include "slice.h"
 
 using namespace std;
 

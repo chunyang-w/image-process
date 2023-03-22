@@ -12,7 +12,7 @@ SRCS := $(wildcard $(SRCDIR)/*.cpp)
 OBJ_DIR := ./build
 OBJS := $(patsubst ./source%.cpp, ./build%.o, $(SRCS))
 
-INPUTS := ./build/image.o ./build/volumn.o ./build/slice.o ./build/projection.o ./build/filter.o ./build/filter3d.o ./build/fastImage.o
+INPUTS := ./build/image.o ./build/volumn.o ./build/slice.o ./build/projection.o ./build/filter.o ./build/filter3d.o ./build/fastImage.o ./build/helper.o
 
 main: main.o $(INPUTS)
 	$(CXX) $(INC) $^ -o $@ -w
@@ -41,9 +41,29 @@ main.o: main.cpp
 ./build/fastImage.o: ./source/fastImage.cpp
 	$(CXX) $(INC) -c $^ -o $@ -w
 
+./build/helper.o: ./source/helper.cpp
+	$(CXX) $(INC) -c $^ -o $@ -w
+
 demo: ./io-demo/minimal.cpp
 	$(CXX) $(INC) $^ -o $@  -w
 	@./demo
+
+test: test.o $(INPUTS)
+	$(CXX) $(INC) $^ -o $@ -w
+
+test.o: test.cpp
+	$(CXX) $(INC) -c $^ -o $@ -w
+
+.PHONY: runtest
+runtest:
+	@make clean
+	@make test
+	@echo ""
+	@echo "======= RUNNING PROGRAM ======="
+	@echo ""
+	@./test
+	@echo ""
+	@echo "======= RUNNING FINISH ======="
 
 .PHONY: run
 run:
