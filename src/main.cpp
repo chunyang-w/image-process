@@ -6,14 +6,17 @@
 # include "projection.h"
 # include "fastImage.h"
 # include "filter3d.h"
+# include "slice.h"
 
 using namespace std;
 
 int main() {
+
     Volume voxel("../Scans/fracture/");
+    Volume voxel2 = slice(voxel, 0, 100, 2, "../Output/slice_frac/");
     // Volume voxel2 = gaussian3d(voxel, 21, "../Output/mini/");
-    Volume voxel2 = median3d(voxel, 5, "../Output/mini/");
-    cout << "voxel2 constructed, size: " << voxel2.img_num << endl;
+    // Volume voxel2 = median3d(voxel, 3, "../Output/mini/");
+    // cout << "voxel2 constructed, size: " << voxel2.img_num << endl;
     // FImage  XY_projection = choose_projection(voxel);
     // XY_projection.write("../Output/YZ_ave_confuciusornis.png");
     // Image max_img = max_projection(voxel);
