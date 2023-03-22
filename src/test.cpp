@@ -5,10 +5,13 @@
 # include "volume.h"
 # include "projection.h"
 # include "fastImage.h"
+# include "slice.h"
 # include "filter3d.h"
 
 using namespace std;
 
 int main() {
-    cout << "in test.cpp" << endl;
+    Volume voxel1("../Scans/fracture/");
+    Volume voxel2 = slice(voxel1, 0, 70, 1, "../Output/updownfracture/");
+    cout << voxel2.img_num << endl;
 }
