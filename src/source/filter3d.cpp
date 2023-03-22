@@ -86,7 +86,7 @@ Volume gaussian3d(Volume voxel, int kernel_size, string dest_path){
     cout<< voxel.img_num << endl;
     for (int o = kernel_size-1; o < voxel.img_num; o++) {
         // for each loop, we need to pop the first image and push the next image
-        cout << o << endl;
+        cout << "Processing Image Number: "<< o << endl;
         if(o != kernel_size-1){
         buffer.pop_front();
         FImage single_img(voxel.files[o]);
