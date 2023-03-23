@@ -17,7 +17,7 @@ using namespace std;
 // then write the image to the path. (if not exist, create a specific path)
 // axis = 0: slice the voxel along z axis, the image has shape (x,y)
 // axis = 1: slice the voxel along y axis, the image has shape (x,z)
-// axis = 2: slice the voxel along y axis, the image has shape (y,z)
+// axis = 2: slice the voxel along x axis, the image has shape (y,z)
 Volume slice(Volume voxel, int start, int end, int axis, string path) {
     cout << "in slice" << endl;
     if (start >= end || voxel.img_num < 1)
