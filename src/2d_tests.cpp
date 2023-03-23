@@ -146,6 +146,7 @@ void test_EdgeDetection() {
 }
 
 int main() {
+    
     test_grayScale();
     test_colourBalance();
     test_Brightness();
