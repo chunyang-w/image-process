@@ -11,7 +11,7 @@ using namespace std;
 /**
 @brief Applies a 2D image filter to the input image img and saves the output to the specified output_path.
 The user can enter "help" to print available filter options. The user is also given the option to apply
-multiple filters sequentially to the output image (note - the result will be saved after each filter).
+multiple filters sequentially to the output image (note the result will be saved after each filter).
 @param img The input image to be filtered
 @param filter_name The name of the filter to be applied
 @param output_path The path where the output image should be saved
