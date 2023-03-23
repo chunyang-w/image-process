@@ -153,7 +153,6 @@ int main(){
                         int slice_start;
                         int slice_end;
                         int axis;
-                        int axis1;
                         bool judge_axis = true;
                         while(judge_axis){
 
@@ -183,17 +182,14 @@ int main(){
                             cout << "0: slice the voxel along z axis, the image has shape (x,y)" << endl;
                             cout << "1: slice the voxel along y axis, the image has shape (x,z)" << endl;
                             cout << "2: slice the voxel along x axis, the image has shape (y,z)" << endl;
-                            if(!cin >> axis){
+                            if(!(cin >> axis)){
                                 cin.clear();
                                 cin.ignore();
                                 cout << "You enter an invalid character" << endl;
                             }
                             else{
-                                axis = 10;
-                                cout << "axis: " << axis << endl;
-                                cin >> axis1;
-                                cout << "axis1: " << axis1 << endl;
                                 if(axis == 0 || axis == 1 || axis == 2){
+                                    cout << axis << endl;
                                     cout << "The axis is valid" << endl;
                                     slice(voxel, slice_start, slice_end, axis, "../Output/slice_result/");
                                     judge_axis = false;
