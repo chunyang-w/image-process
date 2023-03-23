@@ -5,7 +5,7 @@
 # include <vector>
 # include "image.h"
 # include "filter.h"
-# include <cassert>
+
 
 using namespace std;
 
@@ -145,6 +145,16 @@ void test_EdgeDetection() {
     }
 }
 
+int main() {
+    test_grayScale();
+    test_colourBalance();
+    test_Brightness();
+    test_imageBlur();
+    test_histogramEqualisation();
+    test_EdgeDetection();   
+
+    return 0; 
+}
 
 
 
