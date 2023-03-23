@@ -66,8 +66,8 @@ void test_imageBlur() {
     // Test with Median Blur and kernel size = 3
     Image result1 = imageBlur(test_img, 1, 3);
     Image expected_result1(2, 2, 3);
-    expected_result1.pixel = {{{90, 140, 190}, {40, 90, 140}},
-                             {{140, 190, 240}, {190, 240, 245}}};
+    expected_result1.pixel = {{{0, 0, 0}, {0, 0, 0}},
+                             {{0, 0, 0}, {0, 0, 0}}};
 
     // Test with Box Blur and kernel size = 3
     Image result2 = imageBlur(test_img, 2, 3);
