@@ -102,7 +102,7 @@ Filter::Filter(char* optr) {
     } else if (optr == "sobelx") {
         this->kernel = {
             {1, 0, -1},
-            {12, 0, -2},
+            {2, 0, -2},
             {1, 0, -1}
         };
     } else if (optr == "sobely") {
@@ -164,6 +164,9 @@ Image Filter::apply(Image img) {
                         sum += current_pixel * current_coeff;
                     }
                 }
+                // Ensure no overflow beyond range -255 to 255
+                if (sum > 255) {sum = 255;}
+                else if (sum < -255) { sum = -255;}
                 res_img.pixel[i][j][k] = (uint8_t) sum;
             }
         }
@@ -233,7 +236,6 @@ Image colourBalance(Image img) {
     channel_avg.resize(max_channel);
     for (int i = 0; i < img.height; i++) {
         for (int j = 0; j < img.width; j++) {
-            int sum = 0;
             for (int k = 0; k < max_channel; k++) {
                 channel_avg[k] += int(img.pixel[i][j][k]);
             }
@@ -251,7 +253,6 @@ Image colourBalance(Image img) {
         int diff = (avg_intensity - channel_avg[k]) / num_pixel;
         for (int i = 0; i < img.height; i++) {
             for (int j = 0; j < img.width; j++) {
-                int sum = 0;
 
                 // If statements to ensure no overflow if new value would be outside the 0-255 range
                 if (int(img.pixel[i][j][k]) < 0-diff) {
@@ -285,24 +286,21 @@ Image Brightness(Image img) {
         max_channel = img.channel;
     }
 
-    // Find average intensity of each channel
-    vector<int> channel_avg;
-    channel_avg.resize(max_channel);
+    // Find average image intensity
+    int img_avg = 0;
     for (int i = 0; i < img.height; i++) {
         for (int j = 0; j < img.width; j++) {
-            int sum = 0;
             for (int k = 0; k < max_channel; k++) {
-                channel_avg[k] += int(img.pixel[i][j][k]);
+                img_avg += int(img.pixel[i][j][k]);
             }
         }
     }
 
     // Adjust each pixel by the difference between the default value (128) and the channel's average 
+    int diff = 128 - (img_avg/(num_pixel*max_channel));
     for (int k = 0; k < max_channel; k++) {
-        int diff = 128 - (channel_avg[k]/num_pixel);
         for (int i = 0; i < img.height; i++) {
             for (int j = 0; j < img.width; j++) {
-                int sum = 0;
                 if (int(img.pixel[i][j][k]) < 0-diff) {
                     img.pixel[i][j][k] = 0;}
                 else if (int(img.pixel[i][j][k]) > 255-diff) {
@@ -338,7 +336,6 @@ Image Brightness(Image img, int brightness) {
     for (int k = 0; k < max_channel; k++) {
         for (int i = 0; i < img.height; i++) {
             for (int j = 0; j < img.width; j++) {
-                int sum = 0;
                 if (int(img.pixel[i][j][k]) < 0-brightness) {
                     img.pixel[i][j][k] = 0;}
                 else if (int(img.pixel[i][j][k]) > 255-brightness) {

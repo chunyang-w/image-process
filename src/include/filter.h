@@ -43,6 +43,3 @@ class Filter {
         Image apply(Image img);
 
 };
-
-// Function to apply filter
-void apply_2d(Image img, char* filter_name, char* output_path);
