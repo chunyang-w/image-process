@@ -52,12 +52,6 @@ int main() {
             *(p+1) = (uint8_t) 200;
             *(p+2) = (uint8_t) 12;  
             *(p+3) = (uint8_t) 255;
-            // if ((count % w_test) < 20) {
-            //     *p = (uint8_t) 0;
-            //     *(p+1) = (uint8_t) 0;
-            //     *(p+2) = (uint8_t) 0;
-            //     // *(p+3) = (uint8_t) 0;
-            // }
             count++;
     } 
     // Save image to new filename
