@@ -1,3 +1,11 @@
+/* Group: Monte Carlo
+Members: Zepeng Chen    | acse-zc522
+         Ruichen Ding   | acse-rd422
+         Georgie Mercer | edsml-gm1722
+         Chunyang Wang  | acse-cw17222
+         Lizzie Withers | edsml-lcw22
+*/
+
 // A minimal example file showing how to include the stb image headers,
 // and how to read and write image files using these headers.
 //

@@ -1,3 +1,11 @@
+/* Group: Monte Carlo
+Members: Zepeng Chen    | acse-zc522
+         Ruichen Ding   | acse-rd422
+         Georgie Mercer | edsml-gm1722
+         Chunyang Wang  | acse-cw17222
+         Lizzie Withers | edsml-lcw22
+*/
+
 # pragma once
 # include <string>
 # include <vector>
@@ -43,6 +51,3 @@ class Filter {
         Image apply(Image img);
 
 };
-
-// Function to apply filter
-void apply_2d(Image img, char* filter_name, char* output_path);
