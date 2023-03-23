@@ -5,6 +5,7 @@
 #include "stb_image.h"
 #include "stb_image_write.h"
 
+
 // Encapsulated Image class
 // Major feature: 
 // 1. use [i][j][k] selector to select k-th channel on the i-th row of the j-th column
@@ -41,4 +42,5 @@ class FImage {
         void printSize();
         // padding function
         FImage pad(int padding);
+        bool operator==(FImage& x);
 };
