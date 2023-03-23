@@ -8,6 +8,7 @@
 # include "slice.h"
 # include "filter3d.h"
 # include <cassert>
+# include "helper.h"
 
 using namespace std;
 
@@ -29,6 +30,9 @@ FImage set_pixel(int method, int direction){
     FImage pic1 = FImage(3, 3, 3);
     FImage pic2 = FImage(3, 3, 3);
     FImage pic3 = FImage(3, 3, 3);
+
+
+    createFolder(dest_path);
 
 
     pic1.write("../Output/Testimage/test1.png");
