@@ -20,97 +20,97 @@ Members: Zepeng Chen    | acse-zc522
 
 using namespace std;
 
-FImage set_pixel(int method, int direction){
-    /**
-     * This function is to set the picture which is the expected answer of projection
-     * @param method which projection method we shoose to examine
-     * 1: max projection
-     * 2: min projection
-     * 3: average projection 
-     * @param direction which direction we choose to examine
-     * 1: XY plane
-     * 2: XZ plane
-     * 3: YZ plane
-     * @return The expected answer after projection.
-     */
+// FImage set_pixel(int method, int direction){
+//     /**
+//      * This function is to set the picture which is the expected answer of projection
+//      * @param method which projection method we shoose to examine
+//      * 1: max projection
+//      * 2: min projection
+//      * 3: average projection 
+//      * @param direction which direction we choose to examine
+//      * 1: XY plane
+//      * 2: XZ plane
+//      * 3: YZ plane
+//      * @return The expected answer after projection.
+//      */
 
-    string dest_path = "../Output/Testimage/";
-    FImage pic1 = FImage(3, 3, 3);
-    FImage pic2 = FImage(3, 3, 3);
-    FImage pic3 = FImage(3, 3, 3);
-
-
-    createFolder(dest_path);
+//     string dest_path = "../Output/Testimage/";
+//     FImage pic1 = FImage(3, 3, 3);
+//     FImage pic2 = FImage(3, 3, 3);
+//     FImage pic3 = FImage(3, 3, 3);
 
 
-    pic1.write("../Output/Testimage/test1.png");
-    pic2.write("../Output/Testimage/test2.png");
-    pic3.write("../Output/Testimage/test3.png");
+//     createFolder(dest_path);
 
-    FImage expected_pic = FImage(3, 3, 3);
-    for (int i = 0; i < 2; i++){
-        for(int m = 0; m < 2; m++){
-            for(int n = 0; n < 2; n++){
-                pic1.setPixel(i, m, n, 2);
-                pic2.setPixel(i, m, n, 3);
-                pic3.setPixel(i, m, n, 4);
-                if (method == 1){
-                    expected_pic.setPixel(i, m, n, 4); // Maximum intensity projection result.
-                }
-                else if (method == 2)
-                {
-                    expected_pic.setPixel(i, m, n, 2); // Minimum intensity projection result.
-                }
-                else if (method == 3)
-                {
-                    expected_pic.setPixel(i, m, n, 3); // Average intensity projection
-                }
-            }
-        }
-    }
-    return expected_pic;
-}
 
-void Testchoose_projection(FImage expected, int method, int direction){
-    /**
-     * This function is to use the choose_projection function to get the actual answer
-     * and compare the two answers.
-     * @param path The location of the folder where the generated test pictures are saved
-     * @param method which projection method we choose to use
-     * @param direction which direction we choose to project
-    */
+//     pic1.write("../Output/Testimage/test1.png");
+//     pic2.write("../Output/Testimage/test2.png");
+//     pic3.write("../Output/Testimage/test3.png");
 
-    Volume path("../Output/Testimage/");
-    if(method == 1){
-        FImage result = choose_projection(path);
-        if(result == expected){
-        cout << "The test for the maximum projection is successful." << endl;
-        }
-        else{
-            cout << "The test for the maximum projection is failed." << endl;
-        }
-    }
-    else if (method == 2)
-    {
-        FImage result = choose_projection(path);
-        if(result == expected){
-        cout << "The test for the minimum projection is successful." << endl;
-        }
-        else{
-            cout << "The test for the minimum projection is failed." << endl;
-        }
-    }
-    else if (method == 3)
-    {
-        FImage result = choose_projection(path);
-        if(result == expected){
-        cout << "The test for the average projection is successful." << endl;
-        }
-        else{
-            cout << "The test for the average projection is failed." << endl;
-        }
-    }
-}
+//     FImage expected_pic = FImage(3, 3, 3);
+//     for (int i = 0; i < 2; i++){
+//         for(int m = 0; m < 2; m++){
+//             for(int n = 0; n < 2; n++){
+//                 pic1.setPixel(i, m, n, 2);
+//                 pic2.setPixel(i, m, n, 3);
+//                 pic3.setPixel(i, m, n, 4);
+//                 if (method == 1){
+//                     expected_pic.setPixel(i, m, n, 4); // Maximum intensity projection result.
+//                 }
+//                 else if (method == 2)
+//                 {
+//                     expected_pic.setPixel(i, m, n, 2); // Minimum intensity projection result.
+//                 }
+//                 else if (method == 3)
+//                 {
+//                     expected_pic.setPixel(i, m, n, 3); // Average intensity projection
+//                 }
+//             }
+//         }
+//     }
+//     return expected_pic;
+// }
+
+// void Testchoose_projection(FImage expected, int method, int direction){
+//     /**
+//      * This function is to use the choose_projection function to get the actual answer
+//      * and compare the two answers.
+//      * @param path The location of the folder where the generated test pictures are saved
+//      * @param method which projection method we choose to use
+//      * @param direction which direction we choose to project
+//     */
+
+//     Volume path("../Output/Testimage/");
+//     if(method == 1){
+//         FImage result = choose_projection(path);
+//         if(result == expected){
+//         cout << "The test for the maximum projection is successful." << endl;
+//         }
+//         else{
+//             cout << "The test for the maximum projection is failed." << endl;
+//         }
+//     }
+//     else if (method == 2)
+//     {
+//         FImage result = choose_projection(path);
+//         if(result == expected){
+//         cout << "The test for the minimum projection is successful." << endl;
+//         }
+//         else{
+//             cout << "The test for the minimum projection is failed." << endl;
+//         }
+//     }
+//     else if (method == 3)
+//     {
+//         FImage result = choose_projection(path);
+//         if(result == expected){
+//         cout << "The test for the average projection is successful." << endl;
+//         }
+//         else{
+//             cout << "The test for the average projection is failed." << endl;
+//         }
+//     }
+// }
 
 
 
@@ -125,7 +125,7 @@ int test_gaussian_filter(){
      * and it will generate 10 random sets of paramters to test the filter.
      * (The kernel is calculated by hand and set as static for the test)
      */
-    Volume voxel("../Scans/confuciusornis/");
+    Volume voxel("../Images/test_set/");
     Volume voxel2 = gaussian3d(voxel, 3, "../Output/test_Gaussian/");
     double kernel[3][3][3] = {
     {{0.0205863, 0.033941, 0.0205863}, {0.033941, 0.0559593, 0.033941}, {0.0205863, 0.033941, 0.0205863}},
@@ -185,6 +185,6 @@ int main() {
         test_gaussian_filter();
     }
     cout << "Test whole choose_projection function here" << endl;
-    Testchoose_projection(set_pixel(1, 1), 1, 1);
+    // Testchoose_projection(set_pixel(1, 1), 1, 1);
     return 0;
 }
