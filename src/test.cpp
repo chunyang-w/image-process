@@ -178,13 +178,12 @@ int test_gaussian_filter(){
 
 int main() {
     cout << "Do you want to test whole gaussian filter? (Y/N)" << endl;
-    cout << "(It may take about 5 minutes)" << endl;
     char input;
     cin >> input;
     if (input == 'Y' || input == 'y'){
         test_gaussian_filter();
     }
     cout << "Test whole choose_projection function here" << endl;
-    // Testchoose_projection(set_pixel(1, 1), 1, 1);
+    Testchoose_projection(set_pixel(1, 1), 1, 1);
     return 0;
 }
