@@ -7,13 +7,11 @@
 # include <sstream>
 # include <math.h>
 # include <sys/stat.h>
-# include <filesystem>
 # include "helper.h"
 # include "volume.h"
 # include "fastImage.h"
 # include "filter3d.h"
 # include "fastImage.h"
-#include <filesystem>
 
 
 using namespace std;
@@ -41,7 +39,8 @@ Volume gaussian3d(Volume voxel, int kernel_size, string dest_path){
     int success = mkdir(dest_path.c_str(), S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
 
     // Check and create the destination path
-    if (filesystem::exists(dest_path.c_str())) {
+    struct stat sb;
+    if (stat(dest_path.c_str(), &sb) == 0 && S_ISDIR(sb.st_mode)) {
         cout << "Path exists" << std::endl;
     } 
     else {
@@ -180,7 +179,8 @@ Volume median3d(Volume voxel, int kernel_size, string dest_path) {
     int count = 1;
 
     int success = mkdir(dest_path.c_str(), S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
-    if (filesystem::exists(dest_path.c_str())) {
+    struct stat sb;
+    if (stat(dest_path.c_str(), &sb) == 0 && S_ISDIR(sb.st_mode)) {
         cout << "Path exists" << endl;
     } 
     else {
