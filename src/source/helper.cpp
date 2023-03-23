@@ -14,12 +14,26 @@ Members: Zepeng Chen    | acse-zc522
 
 using namespace std;
 
+/**
+@brief Swaps two elements in an array.
+This function takes an array of 8-bit unsigned integers, and swaps the elements at the given indices.
+@param arr The array to be modified.
+@param l The index of the first element to be swapped.
+@param r The index of the second element to be swapped.
+*/
 void swap(uint8_t arr[], int l, int r) {
     uint8_t temp = arr[l];
     arr[l] = arr[r];
     arr[r] = temp;
 }
 
+/**
+@brief Partition an array of unsigned 8-bit integers around a pivot element.
+@param arr - the array to be partitioned
+@param l - the index of the leftmost element
+@param r - the index of the rightmost element
+@return the index of the pivot element after partitioning
+*/
 int partition(uint8_t arr[], int l, int r) {
     int pivot = arr[l];
     int count = 0;
@@ -41,6 +55,12 @@ int partition(uint8_t arr[], int l, int r) {
     return pivotIdx;
 }
  
+/**
+@brief Sorts an array of unsigned 8-bit integers in non-descending order using the Quick Sort algorithm.
+@param arr The array to be sorted.
+@param l The starting index of the subarray to be sorted.
+@param r The ending index of the subarray to be sorted.
+*/
 void quickSort(uint8_t arr[], int l, int r) {
     if (l >= r)
         return;
@@ -49,6 +69,11 @@ void quickSort(uint8_t arr[], int l, int r) {
     quickSort(arr, p + 1, r);
 }
 
+/**
+@brief Converts an integer to an 8-bit binary string representation.
+@param count the integer to be converted
+@return the 8-bit binary string representation of the integer
+*/
 string num2string(int count) {
     string num_output = to_string(count);
     string eight_bit = "";
@@ -59,6 +84,14 @@ string num2string(int count) {
     return eight_bit;
 }
 
+/**
+@brief Creates a folder at the specified path if it doesn't already exist.
+The function first checks if the folder already exists. If it does, it prints a message to console.
+If it does not exist, it attempts to create the folder and set the appropriate permissions.
+If the folder creation fails, a runtime error is thrown.
+@param path The path of the folder to be created.
+@throw runtime_error if the folder cannot be created.
+*/
 void createFolder(std::string path) {
     if (filesystem::exists(path.c_str())) {
         cout << "Path exists" << endl;

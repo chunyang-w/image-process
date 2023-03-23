@@ -13,17 +13,26 @@ Members: Zepeng Chen    | acse-zc522
 
 using namespace std;
 
-// slice volume form start-th(included) img to end-th(not included) img (index start from 0).
-// then write the image to the path. (if not exist, create a specific path)
-// axis = 0: slice the voxel along z axis, the image has shape (x,y)
-// axis = 1: slice the voxel along y axis, the image has shape (x,z)
-// axis = 2: slice the voxel along y axis, the image has shape (y,z)
+/**
+@brief Extract a slice from a 3D volume and save it as a set of image files.
+The `slice` function extracts a slice from a 3D volume along a specified axis and saves
+it as a set of image files in the specified directory. The slice is defined by a start
+index (inclusive) and an end index (exclusive) along the specified axis. The function
+returns a `Volume` object that represents the saved images.
+@param voxel The `Volume` object to extract the slice from.
+@param start The index of the first voxel along the specified axis to include in the slice.
+@param end The index of the first voxel along the specified axis to exclude from the slice.
+@param axis The axis along which to extract the slice. 0 for z-axis, 1 for y-axis, or 2 for x-axis.
+@param path The directory path to save the slice images in. The directory will be created if it does not exist.
+@return A `Volume` object that represents the saved images.
+@throws std::runtime_error If the `voxel` is not sliceable along the specified axis or the `axis` input is invalid.
+ */
 Volume slice(Volume voxel, int start, int end, int axis, string path) {
     cout << "in slice" << endl;
     if (start >= end || voxel.img_num < 1)
         throw runtime_error("not sliceable");
 
-    if (axis == 0) { // slicing along z-axis, looking from front to back
+    if (axis == 0) { // Slicing along z-axis, looking from front to back
         bool sliceable = (end < voxel.img_num);
         if (!sliceable)
             throw runtime_error("Voxel not sliceable.");
@@ -32,7 +41,7 @@ Volume slice(Volume voxel, int start, int end, int axis, string path) {
             string path_to_write = path + num2string(i) + ".png";
             FImage(voxel.files[i]).write(path_to_write);
         }
-    } else if (axis == 1) { // slicing along y axis, looking from top to bottom
+    } else if (axis == 1) { // Slicing along y axis, looking from top to bottom
         voxel.preload();
         createFolder(path);
         FImage example_img = voxel.data[0];
@@ -51,7 +60,7 @@ Volume slice(Volume voxel, int start, int end, int axis, string path) {
             temp.write(path_to_write);
         }
         voxel.unload();
-    } else if (axis == 2) { // slicing along x axis, looking from left to right
+    } else if (axis == 2) { // Slicing along x axis, looking from left to right
         voxel.preload();
         createFolder(path);
         FImage example_img = voxel.data[0];
