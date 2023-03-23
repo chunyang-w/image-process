@@ -11,6 +11,7 @@ using namespace std;
 // axis = 1: slice the voxel along y axis, the image has shape (x,z)
 // axis = 2: slice the voxel along x axis, the image has shape (y,z)
 Volume slice(Volume voxel, int start, int end, int axis, string path) {
+    cout << "in slice" << endl;
     if (start >= end || voxel.img_num < 1)
         throw runtime_error("not sliceable");
 
@@ -25,7 +26,7 @@ Volume slice(Volume voxel, int start, int end, int axis, string path) {
         }
     } else if (axis == 1) { // slicing along y axis, looking from top to bottom
         voxel.preload();
-
+        createFolder(path);
         FImage example_img = voxel.data[0];
         int w = example_img.width; int c = example_img.channel;
         for (int n = start; n < end; n++) {
@@ -41,11 +42,10 @@ Volume slice(Volume voxel, int start, int end, int axis, string path) {
             string path_to_write = path + num2string(n) + ".png";
             temp.write(path_to_write);
         }
-
         voxel.unload();
     } else if (axis == 2) { // slicing along x axis, looking from left to right
         voxel.preload();
-
+        createFolder(path);
         FImage example_img = voxel.data[0];
         int h = example_img.height; int c = example_img.channel; 
         for (int n = start; n < end; n++) {
@@ -61,11 +61,9 @@ Volume slice(Volume voxel, int start, int end, int axis, string path) {
             string path_to_write = path + num2string(n) + ".png";
             temp.write(path_to_write);
         }
-
         voxel.unload();
     } else {
         throw runtime_error("invalid axis input");
     }
-
-    return voxel;
+    return Volume(path);
 }

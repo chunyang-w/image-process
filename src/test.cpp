@@ -5,6 +5,7 @@
 # include "volume.h"
 # include "projection.h"
 # include "fastImage.h"
+# include "slice.h"
 # include "filter3d.h"
 # include <cassert>
 
