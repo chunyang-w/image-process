@@ -43,7 +43,7 @@ Volume slice(Volume voxel, int start, int end, int axis, string path) {
             temp.write(path_to_write);
         }
         voxel.unload();
-    } else if (axis == 2) { // slicing along y axis, looking from left to right
+    } else if (axis == 2) { // slicing along x axis, looking from left to right
         voxel.preload();
         createFolder(path);
         FImage example_img = voxel.data[0];
