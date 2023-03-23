@@ -10,16 +10,43 @@ It contains a main function which reads an image or data volume, asks the user w
 
 ## 🧪 User Instructions (TBC)
 
-(all command have to be executed under src directory use g++-12 to compile)
+To run the program use the following commands:
 
-+ To run the main program: `make run`
-+ Complie program: `make`
-+ Clean objective files: `make clean`
-+ Run minimal demo: `make demo`
-+ Run unit test: `make runtest`
+*(They must be exectued under the src directory and use g++-12 to compile)*
 
-(if you wish to use  g++)
-+ run `make run -f makefile_g++`
+**Compile**
+```bash
+make
+```
+
+**Run**
+```bash
+make run
+```
+If you wish to use  g++ then
+```bash
+make run -f makefile_g++
+```
+
+**Clean objective files**
+```bash
+make clean
+```
+
+Once running, the program is interacted with via entries into the command line. These are fairly self explantory, with guidance on options provided throughout, so will not be detailed here.
+
+If processing a 2D image, the high level flow is as follows:
+* Enter image name (note the image much be saved in the Image folder)
+* Choose type of filter to be applied
+* Enter any additional parameters required
+* Image is processed and saved
+* The user has the option to apply another filter on top of the output
+
+Output images are saved in the filter of their name, in the output folder. Their name corresponds to the filter applied, and if multiple filters have been applied, these will be concatenated together.
+
+If processing a 3D image, the high level flow is as follows:
+....
+
 
 ## 📖 Documentation
 
@@ -28,7 +55,7 @@ Html documentation is available in the `Documentation` folder, including details
 This has been generated with Doxygen and can be viewed in your browser through the `index.html` file.
 
 
-## ✅ Testing
+## ✅ Testing (TBC)
 
 The `test.cpp` file contains tests for all functions and can be used to check the programs operation on your system. 
 
