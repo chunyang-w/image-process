@@ -45,7 +45,10 @@ If processing a 2D image, the high level flow is as follows:
 Output images are saved in the filter of their name, in the output folder. Their name corresponds to the filter applied, and if multiple filters have been applied, these will be concatenated together.
 
 If processing a 3D image, the high level flow is as follows:
-....
+* Enter which processing procedure to carry out, eg: Gaussian3D, Median 3D, Projection, Slicing ...
+* Choose which dataset to use (could be predownloaded datasets or userdefined)
+* Choose parameters to apply, eg: kernel size, slicing range ...
+* The operation is then applied and save the output to a folder.
 
 
 ## 📖 Documentation
