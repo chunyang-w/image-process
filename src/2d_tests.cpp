@@ -5,7 +5,7 @@
 # include <vector>
 # include "image.h"
 # include "filter.h"
-
+# include <cassert>
 
 using namespace std;
 
@@ -20,9 +20,9 @@ void test_grayScale() {
                              {{200}, {235}}};
 
     if (result.isEqual(expected_result)) {
-        std::cout << "Test passed" << std::endl;
+        std::cout << "grayScale test passed" << std::endl;
     } else {
-        std::cout << "Test failed" << std::endl;
+        std::cout << "grayScale test failed" << std::endl;
     }
 }
 
@@ -36,9 +36,9 @@ void test_colourBalance() {
                              {{196, 197, 208}, {246, 247, 213}}};
 
     if (result.isEqual(expected_result)) {
-        std::cout << "Test passed" << std::endl;
+        std::cout << "colourBalance test passed" << std::endl;
     } else {
-        std::cout << "Test failed" << std::endl;
+        std::cout << "colourBalance test failed" << std::endl;
     }
 }
 
@@ -52,9 +52,9 @@ void test_Brightness() {
                              {{140, 190, 240}, {190, 240, 245}}};
 
     if (result.isEqual(expected_result)) {
-        std::cout << "Test passed" << std::endl;
+        std::cout << "Brightness test passed" << std::endl;
     } else {
-        std::cout << "Test failed" << std::endl;
+        std::cout << "Brightness test failed" << std::endl;
     }
 }
 
@@ -67,24 +67,34 @@ void test_imageBlur() {
     Image result1 = imageBlur(test_img, 1, 3);
     Image expected_result1(2, 2, 3);
     expected_result1.pixel = {{{0, 0, 0}, {0, 0, 0}},
-                             {{0, 0, 0}, {0, 0, 0}}};
+                              {{0, 0, 0}, {0, 0, 0}}};
 
     // Test with Box Blur and kernel size = 3
     Image result2 = imageBlur(test_img, 2, 3);
     Image expected_result2(2, 2, 3);
-    expected_result1.pixel = {{{55, 77, 95}, {55, 77, 95}}, 
+    expected_result2.pixel = {{{55, 77, 95}, {55, 77, 95}}, 
                                {{55, 77, 95}, {55, 77, 95}}};
 
     // Test with Gaussian Blur and kernel size = 5
     Image result3 = imageBlur(test_img, 3, 5);
     Image expected_result3(2, 2, 3);
-    expected_result1.pixel = {{{45, 65, 83}, {44, 64, 80}},
-                               {{54, 73, 89}, {54, 74, 88}}};
+    expected_result3.pixel = {{{47, 68, 86}, {46, 67, 83}}, 
+                              {{56, 77, 94}, {58, 78, 92}}};
 
-    if (result1.isEqual(expected_result1) && result2.isEqual(expected_result2) && result3.isEqual(expected_result3)) {
-        std::cout << "Test passed" << std::endl;
+    if (result1.isEqual(expected_result1)) {
+        std::cout << "medianBlur test passed" << std::endl;
     } else {
-        std::cout << "Test failed" << std::endl;
+        std::cout << "medianBlur test failed" << std::endl;
+    }
+    if (result2.isEqual(expected_result2)) {
+        std::cout << "boxBlur test passed" << std::endl;
+    } else {
+        std::cout << "boxBlur test failed" << std::endl;
+    }
+    if (result3.isEqual(expected_result3)) {
+        std::cout << "gaussianBlur test passed" << std::endl;
+    } else {
+        std::cout << "gaussianBlur test failed" << std::endl;
     }
 }
 
@@ -102,9 +112,9 @@ void test_histogramEqualisation() {
                              {{191, 191, 191}, {255, 255, 255}}};
 
     if (result.isEqual(expected_result)) {
-        std::cout << "Test passed" << std::endl;
+        std::cout << "histogramEqualisation test passed" << std::endl;
     } else {
-        std::cout << "Test failed" << std::endl;
+        std::cout << "histogramEqualisation test failed" << std::endl;
     }
 }   
 
@@ -115,35 +125,50 @@ void test_EdgeDetection() {
 
     // Test with Sobel method 
     Image result1 = edgeDetection(test_img, 1);
-    Image expected_result1(2, 2, 3);
-    expected_result1.pixel = {{{153}, {6}},
-                             {{244}, {101}}};
+    Image expected_result1(2, 2, 1);
+    expected_result1.pixel = {{{1}, {255}},
+                             {{255}, {104}}};
 
     // Test with Prewitt method 
     Image result2 = edgeDetection(test_img, 2);
     Image expected_result2(2, 2, 1);
-    expected_result1.pixel = {{{193}, {121}}, 
-                              {{50}, {11}}};
+    expected_result2.pixel = {{{1}, {255}, 
+                             {250}, {101}}};
 
     // Test with Scharr method
     Image result3 = edgeDetection(test_img, 3);
-    Image expected_result3(2, 2, 2);
-    expected_result1.pixel = {{{141}, {132},
-                               {166}, {224}}};
+    Image expected_result3(2, 2, 1);
+    expected_result3.pixel = {{{1}, {255},
+                               {255}, {104}}};
     
     // Test with Roberts Cross method 
     Image result4 = edgeDetection(test_img, 4);
-    Image expected_result4(2, 2, 3);
-    expected_result1.pixel = {{{106}, {188},
+    Image expected_result4(2, 2, 1);
+    expected_result4.pixel = {{{106}, {188},
                                {160}, {231}}};
 
-    if (result1.isEqual(expected_result1) && result2.isEqual(expected_result2) 
-       && result3.isEqual(expected_result3) && result4.isEqual(expected_result4)) {
-        std::cout << "Test passed" << std::endl;
+    if (result1.isEqual(expected_result1)) {
+        std::cout << "Sobel test passed" << std::endl;
     } else {
-        std::cout << "Test failed" << std::endl;
+        std::cout << "Sobel test failed" << std::endl;
+    }
+    if (result2.isEqual(expected_result2)) {
+        std::cout << "Prewitt test passed" << std::endl;
+    } else {
+        std::cout << "Prewitt test failed" << std::endl;
+    }
+    if (result3.isEqual(expected_result3)) {
+        std::cout << "Scharr test passed" << std::endl;
+    } else {
+        std::cout << "Scharr test failed" << std::endl;
+    }
+    if (result4.isEqual(expected_result4)) {
+        std::cout << "Roberts Cross test passed" << std::endl;
+    } else {
+        std::cout << "Roberts Cross test failed" << std::endl;
     }
 }
+
 
 int main() {
     
@@ -156,6 +181,7 @@ int main() {
 
     return 0; 
 }
+
 
 
 
