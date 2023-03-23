@@ -146,3 +146,19 @@ FImage FImage::pad(int padding) {
     }
     return new_img;
 }
+
+bool FImage::operator==(FImage& x){
+    bool result = false;
+    if (this->width == x.width && this->height == x.height&& this->channel == x.channel){
+        for(int i = 0; i< width; i++){
+            for(int p = 0; p < height; p++){
+                for(int q = 0; q < channel; q++){
+                    if (this->getPixel(i, p, q) == x.getPixel(i, p, q)){
+                        result = true;
+                    }
+                }
+            }
+        }
+    }
+    return result;
+}
