@@ -29,20 +29,43 @@ FImage choose_projection(Volume voxel) {
      */
 
     // Choose projection method and projection plane
-    cout << "Please enter your projection method:" << endl;
-    cout << "1: max projection" << endl;
-    cout << "2: min projection" << endl;
-    cout << "3: average projection" << endl;
+    bool flag = true;
     int method;
-    cin >> method;
-
-    // Choose projection plane
-    cout << "Please enter your final projection plane:" << endl;
-    cout << "1: XY plane" << endl;
-    cout << "2: XZ plane" << endl;
-    cout << "3: YZ plane" << endl;
     int plane;
-    cin >> plane;
+    while(flag){
+        cout << "Please enter your projection method:" << endl;
+        cout << "1: max projection" << endl;
+        cout << "2: min projection" << endl;
+        cout << "3: average projection" << endl;
+        if(!cin >> method){
+            cin.clear();
+            cin.ignore();
+            cout << "You enter an invalid character" << endl;
+            }
+            else{
+            cin >> method;
+            }
+        // Choose projection plane
+        cout << "Please enter your final projection plane:" << endl;
+        cout << "1: XY plane" << endl;
+        cout << "2: XZ plane" << endl;
+        cout << "3: YZ plane" << endl;
+        if(!cin >> plane){
+            cin.clear();
+            cin.ignore();
+            cout << "You enter an invalid character" << endl;
+            }
+            else{
+            cin >> plane;
+            }
+            if(method != 1 && method != 2 && method != 3 && plane != 1 && plane != 2 && plane != 3){
+                cout << "You enter an invalid number" << endl;
+            }
+            else{
+                flag = false;
+            }
+    }
+    // Choose projection plane
     int length;
     vector<vector<vector<int>>> init_pixel;
     FImage example_img(voxel.files[0]);
