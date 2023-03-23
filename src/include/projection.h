@@ -11,7 +11,7 @@ Members: Zepeng Chen    | acse-zc522
 # include <vector>
 # include "image.h"
 # include "volume.h"
-# include "fastimage.h"
+# include "fastImage.h"
 
 using namespace std;
 
