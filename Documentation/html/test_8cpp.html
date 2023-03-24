@@ -83,28 +83,136 @@ $(function() {
 <code>#include &lt;vector&gt;</code><br />
 <code>#include &quot;<a class="el" href="image_8h_source.html">image.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="filter_8h_source.html">filter.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="volume_8h_source.html">volume.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="projection_8h_source.html">projection.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="fast_image_8h_source.html">fastImage.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="slice_8h_source.html">slice.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="filter3d_8h_source.html">filter3d.h</a>&quot;</code><br />
 <code>#include &lt;cassert&gt;</code><br />
+<code>#include &quot;<a class="el" href="helper_8h_source.html">helper.h</a>&quot;</code><br />
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:afb5adfd5fa44b0b3b9af30ca832632a0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="test_8cpp.html#afb5adfd5fa44b0b3b9af30ca832632a0">test_grayScale</a> ()</td></tr>
-<tr class="separator:afb5adfd5fa44b0b3b9af30ca832632a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7cd0d3d67456e555dbb29ba58c08515b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_f_image.html">FImage</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="test_8cpp.html#a7cd0d3d67456e555dbb29ba58c08515b">set_pixel</a> (int method, int direction)</td></tr>
+<tr class="separator:a7cd0d3d67456e555dbb29ba58c08515b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a818c467f4fda3b740c15d01d1ae23238"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="test_8cpp.html#a818c467f4fda3b740c15d01d1ae23238">Testchoose_projection</a> (<a class="el" href="class_f_image.html">FImage</a> expected, int method, int direction)</td></tr>
+<tr class="separator:a818c467f4fda3b740c15d01d1ae23238"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad6ffcc8c63ff0dcd1747c5e6e2e92206"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="test_8cpp.html#ad6ffcc8c63ff0dcd1747c5e6e2e92206">test_gaussian_filter</a> ()</td></tr>
+<tr class="separator:ad6ffcc8c63ff0dcd1747c5e6e2e92206"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae66f6b31b5ad750f1fe042a706a4e3d4"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="test_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a> ()</td></tr>
+<tr class="separator:ae66f6b31b5ad750f1fe042a706a4e3d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="afb5adfd5fa44b0b3b9af30ca832632a0" name="afb5adfd5fa44b0b3b9af30ca832632a0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afb5adfd5fa44b0b3b9af30ca832632a0">&#9670;&#160;</a></span>test_grayScale()</h2>
+<a id="ae66f6b31b5ad750f1fe042a706a4e3d4" name="ae66f6b31b5ad750f1fe042a706a4e3d4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae66f6b31b5ad750f1fe042a706a4e3d4">&#9670;&#160;</a></span>main()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void test_grayScale </td>
+          <td class="memname">int main </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7cd0d3d67456e555dbb29ba58c08515b" name="a7cd0d3d67456e555dbb29ba58c08515b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7cd0d3d67456e555dbb29ba58c08515b">&#9670;&#160;</a></span>set_pixel()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_f_image.html">FImage</a> set_pixel </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>method</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>direction</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>This function is to set the picture which is the expected answer of projection </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">method</td><td>which projection method we shoose to examine 1: max projection 2: min projection 3: average projection </td></tr>
+    <tr><td class="paramname">direction</td><td>which direction we choose to examine 1: XY plane 2: XZ plane 3: YZ plane </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The expected answer after projection.</dd></dl>
+
+</div>
+</div>
+<a id="ad6ffcc8c63ff0dcd1747c5e6e2e92206" name="ad6ffcc8c63ff0dcd1747c5e6e2e92206"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad6ffcc8c63ff0dcd1747c5e6e2e92206">&#9670;&#160;</a></span>test_gaussian_filter()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int test_gaussian_filter </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>test gaussian filter This function is used to test the gaussian filter and it will generate 10 random sets of paramters to test the filter. (The kernel is calculated by hand and set as static for the test)</p>
+
+</div>
+</div>
+<a id="a818c467f4fda3b740c15d01d1ae23238" name="a818c467f4fda3b740c15d01d1ae23238"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a818c467f4fda3b740c15d01d1ae23238">&#9670;&#160;</a></span>Testchoose_projection()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Testchoose_projection </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_f_image.html">FImage</a>&#160;</td>
+          <td class="paramname"><em>expected</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>method</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>direction</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>This function is to use the choose_projection function to get the actual answer and compare the two answers. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">path</td><td>The location of the folder where the generated test pictures are saved </td></tr>
+    <tr><td class="paramname">method</td><td>which projection method we choose to use </td></tr>
+    <tr><td class="paramname">direction</td><td>which direction we choose to project</td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>

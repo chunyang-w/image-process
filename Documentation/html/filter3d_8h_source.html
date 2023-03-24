@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.7"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Monte Carlo - Image Processing Tool: src/include/projection.h Source File</title>
+<title>Monte Carlo - Image Processing Tool: src/include/filter3d.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -74,10 +74,10 @@ $(function() {
 </div>
 </div><!-- top -->
 <div class="header">
-  <div class="headertitle"><div class="title">projection.h</div></div>
+  <div class="headertitle"><div class="title">filter3d.h</div></div>
 </div><!--header-->
 <div class="contents">
-<a href="projection_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/* Group: Monte Carlo</span></div>
+<a href="filter3d_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/* Group: Monte Carlo</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">Members: Zepeng Chen    | acse-zc522</span></div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">         Ruichen Ding   | acse-rd422</span></div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment">         Georgie Mercer | edsml-gm1722</span></div>
@@ -86,20 +86,20 @@ $(function() {
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="comment">*/</span></div>
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor"># pragma once</span></div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor"># include &lt;string&gt;</span></div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor"># include &lt;vector&gt;</span></div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor"># include &quot;<a class="code" href="image_8h.html">image.h</a>&quot;</span></div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor"># include &quot;<a class="code" href="volume_8h.html">volume.h</a>&quot;</span></div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor"># include &quot;<a class="code" href="fast_image_8h.html">fastImage.h</a>&quot;</span></div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="keyword">using namespace </span>std;</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><a class="code hl_class" href="class_f_image.html">FImage</a> <a class="code hl_function" href="projection_8h.html#a6dcd2fb1f13749c27a3dca37d52faf96">choose_projection</a>(<a class="code hl_class" href="class_volume.html">Volume</a> voxel);</div>
-<div class="ttc" id="aclass_f_image_html"><div class="ttname"><a href="class_f_image.html">FImage</a></div><div class="ttdef"><b>Definition:</b> fastImage.h:24</div></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor"># include &quot;<a class="code" href="image_8h.html">image.h</a>&quot;</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor"># include &quot;<a class="code" href="volume_8h.html">volume.h</a>&quot;</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor"># include &quot;<a class="code" href="fast_image_8h.html">fastImage.h</a>&quot;</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="keyword">using namespace </span>std;</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><a class="code hl_class" href="class_volume.html">Volume</a> <a class="code hl_function" href="filter3d_8h.html#a25d05305536e1745442347557a256600">gaussian3d</a>(<a class="code hl_class" href="class_volume.html">Volume</a> voxel, <span class="keywordtype">int</span> kernel_size, <span class="keywordtype">string</span> dest_path);</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno"><a class="line" href="filter3d_8h.html#a605d3f64272fc952e2f95f053b39b627">   18</a></span><a class="code hl_class" href="class_volume.html">Volume</a> <a class="code hl_function" href="filter3d_8h.html#a605d3f64272fc952e2f95f053b39b627">median3d</a>(<a class="code hl_class" href="class_volume.html">Volume</a> voxel, <span class="keywordtype">int</span> kernel_size, std::string dest_path);</div>
 <div class="ttc" id="aclass_volume_html"><div class="ttname"><a href="class_volume.html">Volume</a></div><div class="ttdef"><b>Definition:</b> volume.h:14</div></div>
 <div class="ttc" id="afast_image_8h_html"><div class="ttname"><a href="fast_image_8h.html">fastImage.h</a></div></div>
+<div class="ttc" id="afilter3d_8h_html_a25d05305536e1745442347557a256600"><div class="ttname"><a href="filter3d_8h.html#a25d05305536e1745442347557a256600">gaussian3d</a></div><div class="ttdeci">Volume gaussian3d(Volume voxel, int kernel_size, string dest_path)</div><div class="ttdoc">Gaussian filter for 3D images dataset. This function is used to filter 3D images dataset with Gaussia...</div><div class="ttdef"><b>Definition:</b> filter3d.cpp:30</div></div>
+<div class="ttc" id="afilter3d_8h_html_a605d3f64272fc952e2f95f053b39b627"><div class="ttname"><a href="filter3d_8h.html#a605d3f64272fc952e2f95f053b39b627">median3d</a></div><div class="ttdeci">Volume median3d(Volume voxel, int kernel_size, std::string dest_path)</div></div>
 <div class="ttc" id="aimage_8h_html"><div class="ttname"><a href="image_8h.html">image.h</a></div></div>
-<div class="ttc" id="aprojection_8h_html_a6dcd2fb1f13749c27a3dca37d52faf96"><div class="ttname"><a href="projection_8h.html#a6dcd2fb1f13749c27a3dca37d52faf96">choose_projection</a></div><div class="ttdeci">FImage choose_projection(Volume voxel)</div><div class="ttdoc">Returns an FImage object representing the 2D projection of a given 3D volume. This function prompts t...</div><div class="ttdef"><b>Definition:</b> projection.cpp:30</div></div>
 <div class="ttc" id="avolume_8h_html"><div class="ttname"><a href="volume_8h.html">volume.h</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->

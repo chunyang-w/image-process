@@ -77,7 +77,43 @@ $(function() {
   <div class="headertitle"><div class="title">volume.h</div></div>
 </div><!--header-->
 <div class="contents">
-<a href="volume_8h.html">Go to the documentation of this file.</a><div class="fragment"></div><!-- fragment --></div><!-- contents -->
+<a href="volume_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/* Group: Monte Carlo</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">Members: Zepeng Chen    | acse-zc522</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">         Ruichen Ding   | acse-rd422</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment">         Georgie Mercer | edsml-gm1722</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment">         Chunyang Wang  | acse-cw17222</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="comment">         Lizzie Withers | edsml-lcw22</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="comment">*/</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor"># pragma once</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor"># include &lt;vector&gt;</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor"># include &lt;string&gt;</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor"># include &quot;<a class="code" href="fast_image_8h.html">fastImage.h</a>&quot;</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno"><a class="line" href="class_volume.html">   14</a></span><span class="keyword">class </span><a class="code hl_class" href="class_volume.html">Volume</a> {</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno"><a class="line" href="class_volume.html#a0c387ab28bc672ca1b2a2a4c9fb23f25">   16</a></span>        <span class="keywordtype">int</span> <a class="code hl_variable" href="class_volume.html#a0c387ab28bc672ca1b2a2a4c9fb23f25">img_num</a>;</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno"><a class="line" href="class_volume.html#a7f8df9692cacd484ca0549a34e7ced00">   18</a></span>        std::vector&lt;std::string&gt; <a class="code hl_variable" href="class_volume.html#a7f8df9692cacd484ca0549a34e7ced00">files</a>;</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno"><a class="line" href="class_volume.html#ac87ac3dfb2c7dad9cc78ec7eae498d8f">   19</a></span>        std::string <a class="code hl_variable" href="class_volume.html#ac87ac3dfb2c7dad9cc78ec7eae498d8f">root_dir</a>;</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>        </div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno"><a class="line" href="class_volume.html#a4531564a5846038e84770381dd7bab86">   21</a></span>        std::vector&lt;FImage&gt; <a class="code hl_variable" href="class_volume.html#a4531564a5846038e84770381dd7bab86">data</a>;</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>        <a class="code hl_class" href="class_volume.html">Volume</a>(std::string <a class="code hl_variable" href="class_volume.html#ac87ac3dfb2c7dad9cc78ec7eae498d8f">root_dir</a>);</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>        <span class="comment">// preload all images into memory;</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>        <span class="keywordtype">void</span> <a class="code hl_function" href="class_volume.html#a4268c2c0a563d262613debbbbd0b8bcb">preload</a>();</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>        <span class="keywordtype">void</span> <a class="code hl_function" href="class_volume.html#ae00f09874a77e725c5ee01a8244310fe">unload</a>();</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>        </div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>};</div>
+<div class="ttc" id="aclass_volume_html"><div class="ttname"><a href="class_volume.html">Volume</a></div><div class="ttdef"><b>Definition:</b> volume.h:14</div></div>
+<div class="ttc" id="aclass_volume_html_a0c387ab28bc672ca1b2a2a4c9fb23f25"><div class="ttname"><a href="class_volume.html#a0c387ab28bc672ca1b2a2a4c9fb23f25">Volume::img_num</a></div><div class="ttdeci">int img_num</div><div class="ttdef"><b>Definition:</b> volume.h:16</div></div>
+<div class="ttc" id="aclass_volume_html_a4268c2c0a563d262613debbbbd0b8bcb"><div class="ttname"><a href="class_volume.html#a4268c2c0a563d262613debbbbd0b8bcb">Volume::preload</a></div><div class="ttdeci">void preload()</div><div class="ttdoc">Preloads the Volume's image data into memory. This function initializes an FImage object for each PNG...</div><div class="ttdef"><b>Definition:</b> volume.cpp:55</div></div>
+<div class="ttc" id="aclass_volume_html_a4531564a5846038e84770381dd7bab86"><div class="ttname"><a href="class_volume.html#a4531564a5846038e84770381dd7bab86">Volume::data</a></div><div class="ttdeci">std::vector&lt; FImage &gt; data</div><div class="ttdef"><b>Definition:</b> volume.h:21</div></div>
+<div class="ttc" id="aclass_volume_html_a7f8df9692cacd484ca0549a34e7ced00"><div class="ttname"><a href="class_volume.html#a7f8df9692cacd484ca0549a34e7ced00">Volume::files</a></div><div class="ttdeci">std::vector&lt; std::string &gt; files</div><div class="ttdef"><b>Definition:</b> volume.h:18</div></div>
+<div class="ttc" id="aclass_volume_html_ac87ac3dfb2c7dad9cc78ec7eae498d8f"><div class="ttname"><a href="class_volume.html#ac87ac3dfb2c7dad9cc78ec7eae498d8f">Volume::root_dir</a></div><div class="ttdeci">std::string root_dir</div><div class="ttdef"><b>Definition:</b> volume.h:19</div></div>
+<div class="ttc" id="aclass_volume_html_ae00f09874a77e725c5ee01a8244310fe"><div class="ttname"><a href="class_volume.html#ae00f09874a77e725c5ee01a8244310fe">Volume::unload</a></div><div class="ttdeci">void unload()</div><div class="ttdoc">Unloads the Volume's image data from memory. This function clears the Volume's data vector,...</div><div class="ttdef"><b>Definition:</b> volume.cpp:66</div></div>
+<div class="ttc" id="afast_image_8h_html"><div class="ttname"><a href="fast_image_8h.html">fastImage.h</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.7

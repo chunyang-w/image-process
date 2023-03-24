@@ -83,22 +83,30 @@ $(function() {
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a58edd1c45b4faeb5f789b0d036d02313"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_image.html#a58edd1c45b4faeb5f789b0d036d02313">Image</a> ()</td></tr>
+<tr class="memdesc:a58edd1c45b4faeb5f789b0d036d02313"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor for the <a class="el" href="class_image.html">Image</a> class. This constructor initializes an empty <a class="el" href="class_image.html">Image</a> object with no data.  <br /></td></tr>
 <tr class="separator:a58edd1c45b4faeb5f789b0d036d02313"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adf558e065a88d0eaf66370d47f632f32"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_image.html#adf558e065a88d0eaf66370d47f632f32">Image</a> (std::string path)</td></tr>
 <tr class="separator:adf558e065a88d0eaf66370d47f632f32"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac3a6c85e37ae6c9782e93154a301fb0b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_image.html#ac3a6c85e37ae6c9782e93154a301fb0b">Image</a> (int <a class="el" href="class_image.html#ab8d12f635013c04159cd4d3d972bac88">width</a>, int <a class="el" href="class_image.html#a51df43db420c9c0b57536cb2dd36de5c">height</a>, int channels)</td></tr>
+<tr class="memdesc:ac3a6c85e37ae6c9782e93154a301fb0b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs an <a class="el" href="class_image.html">Image</a> object with the specified width, height, and number of channels. The constructor initializes the <a class="el" href="class_image.html">Image</a> object with the specified width, height, and number of channels. It also creates a 3-dimensional pixel vector with dimensions (height x width x channel) to store the image data.  <br /></td></tr>
 <tr class="separator:ac3a6c85e37ae6c9782e93154a301fb0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acd7e77c7d905121dd8cf89c7b0bb75ef"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_image.html#acd7e77c7d905121dd8cf89c7b0bb75ef">Image</a> (const <a class="el" href="class_image.html">Image</a> &amp;old_obj)</td></tr>
+<tr class="memdesc:acd7e77c7d905121dd8cf89c7b0bb75ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy constructor of for the <a class="el" href="class_image.html">Image</a> class This constructor initializes a new <a class="el" href="class_image.html">Image</a> object by copying the width, height, and channel properties of the given <a class="el" href="class_image.html">Image</a> object. It then constructs a new 3D vector pixel and populates it with the pixel values of the given object. Note that this constructor performs a deep copy of the pixel data to ensure that any modifications to the pixel data of the new object does not affect the original object.  <br /></td></tr>
 <tr class="separator:acd7e77c7d905121dd8cf89c7b0bb75ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0294f63700543e11c0f0da85601c7ae5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_image.html#a0294f63700543e11c0f0da85601c7ae5">~Image</a> ()</td></tr>
+<tr class="memdesc:a0294f63700543e11c0f0da85601c7ae5"><td class="mdescLeft">&#160;</td><td class="mdescRight">The <a class="el" href="class_image.html">Image</a> destructor. This destructor is responsible for freeing the memory used by the <a class="el" href="class_image.html">Image</a> object.  <br /></td></tr>
 <tr class="separator:a0294f63700543e11c0f0da85601c7ae5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1803c18d9f953a490f7cd9aff0bcb1fb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_image.html#a1803c18d9f953a490f7cd9aff0bcb1fb">write</a> (std::string path)</td></tr>
+<tr class="memdesc:a1803c18d9f953a490f7cd9aff0bcb1fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write the image to a file path in PNG format.  <br /></td></tr>
 <tr class="separator:a1803c18d9f953a490f7cd9aff0bcb1fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9420b598a67ed419e266c0143acbc77d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_image.html#a9420b598a67ed419e266c0143acbc77d">isEqual</a> (const <a class="el" href="class_image.html">Image</a> &amp;other) const</td></tr>
+<tr class="memdesc:a9420b598a67ed419e266c0143acbc77d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compares this image with another image for equality.  <br /></td></tr>
 <tr class="separator:a9420b598a67ed419e266c0143acbc77d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab1da44b271f9e2de5bab731d4cfe9cc0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_image.html#ab1da44b271f9e2de5bab731d4cfe9cc0">printSize</a> ()</td></tr>
+<tr class="memdesc:ab1da44b271f9e2de5bab731d4cfe9cc0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Print the size of the image in the format "(width, height, channel)".  <br /></td></tr>
 <tr class="separator:ab1da44b271f9e2de5bab731d4cfe9cc0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad180eb673d42f03e17666df155696f7b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_image.html">Image</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_image.html#ad180eb673d42f03e17666df155696f7b">pad</a> (int padding)</td></tr>
+<tr class="memdesc:ad180eb673d42f03e17666df155696f7b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new image with padding around the edges of the original image.  <br /></td></tr>
 <tr class="separator:ad180eb673d42f03e17666df155696f7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
@@ -127,6 +135,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Default constructor for the <a class="el" href="class_image.html">Image</a> class. This constructor initializes an empty <a class="el" href="class_image.html">Image</a> object with no data. </p>
 
 </div>
 </div>
@@ -158,19 +168,19 @@ Public Attributes</h2></td></tr>
           <td class="memname">Image::Image </td>
           <td>(</td>
           <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>width</em>, </td>
+          <td class="paramname"><em>w</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>height</em>, </td>
+          <td class="paramname"><em>h</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>channels</em>&#160;</td>
+          <td class="paramname"><em>c</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -179,6 +189,16 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Constructs an <a class="el" href="class_image.html">Image</a> object with the specified width, height, and number of channels. The constructor initializes the <a class="el" href="class_image.html">Image</a> object with the specified width, height, and number of channels. It also creates a 3-dimensional pixel vector with dimensions (height x width x channel) to store the image data. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">w</td><td>The width of the image. </td></tr>
+    <tr><td class="paramname">h</td><td>The height of the image. </td></tr>
+    <tr><td class="paramname">c</td><td>The number of color channels in the image. The constructor initializes the <a class="el" href="class_image.html">Image</a> object with the specified width, height, and number of channels. It also creates a 3-dimensional pixel vector with dimensions (height x width x channel) to store the image data. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -198,6 +218,14 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Copy constructor of for the <a class="el" href="class_image.html">Image</a> class This constructor initializes a new <a class="el" href="class_image.html">Image</a> object by copying the width, height, and channel properties of the given <a class="el" href="class_image.html">Image</a> object. It then constructs a new 3D vector pixel and populates it with the pixel values of the given object. Note that this constructor performs a deep copy of the pixel data to ensure that any modifications to the pixel data of the new object does not affect the original object. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">old_obj</td><td>The object to be copied. </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a id="a0294f63700543e11c0f0da85601c7ae5" name="a0294f63700543e11c0f0da85601c7ae5"></a>
@@ -214,6 +242,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>The <a class="el" href="class_image.html">Image</a> destructor. This destructor is responsible for freeing the memory used by the <a class="el" href="class_image.html">Image</a> object. </p>
 
 </div>
 </div>
@@ -234,6 +264,15 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Compares this image with another image for equality. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td>The image to be compared with. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if the images are equal in size and pixel values, false otherwise. </dd></dl>
+
 </div>
 </div>
 <a id="ad180eb673d42f03e17666df155696f7b" name="ad180eb673d42f03e17666df155696f7b"></a>
@@ -252,6 +291,15 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Creates a new image with padding around the edges of the original image. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">padding</td><td>An integer value representing the amount of padding to add around the edges of the image. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A new <a class="el" href="class_image.html">Image</a> object with the specified amount of padding added around the edges. </dd></dl>
+
 </div>
 </div>
 <a id="ab1da44b271f9e2de5bab731d4cfe9cc0" name="ab1da44b271f9e2de5bab731d4cfe9cc0"></a>
@@ -268,6 +316,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Print the size of the image in the format "(width, height, channel)". </p>
 
 </div>
 </div>
@@ -286,6 +336,20 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Write the image to a file path in PNG format. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">path</td><td>A string representing the file path. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">runtime_error</td><td>if the image writing operation fails. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
