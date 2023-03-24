@@ -74,9 +74,88 @@ $(function() {
 </div>
 </div><!-- top -->
 <div class="header">
+  <div class="summary">
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle"><div class="title">slice.cpp File Reference</div></div>
 </div><!--header-->
 <div class="contents">
+<div class="textblock"><code>#include &lt;string&gt;</code><br />
+<code>#include &quot;<a class="el" href="helper_8h_source.html">helper.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="fast_image_8h_source.html">fastImage.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="volume_8h_source.html">volume.h</a>&quot;</code><br />
+</div><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:ad09e37e905725761e697db9ca9999902"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_volume.html">Volume</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="slice_8cpp.html#ad09e37e905725761e697db9ca9999902">slice</a> (<a class="el" href="class_volume.html">Volume</a> voxel, int start, int end, int axis, string path)</td></tr>
+<tr class="memdesc:ad09e37e905725761e697db9ca9999902"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extract a slice from a 3D volume and save it as a set of image files. The <code>slice</code> function extracts a slice from a 3D volume along a specified axis and saves it as a set of image files in the specified directory. The slice is defined by a start index (inclusive) and an end index (exclusive) along the specified axis. The function returns a <code><a class="el" href="class_volume.html">Volume</a></code> object that represents the saved images.  <br /></td></tr>
+<tr class="separator:ad09e37e905725761e697db9ca9999902"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="ad09e37e905725761e697db9ca9999902" name="ad09e37e905725761e697db9ca9999902"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad09e37e905725761e697db9ca9999902">&#9670;&#160;</a></span>slice()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_volume.html">Volume</a> slice </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_volume.html">Volume</a>&#160;</td>
+          <td class="paramname"><em>voxel</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>start</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>end</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>axis</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">string&#160;</td>
+          <td class="paramname"><em>path</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Extract a slice from a 3D volume and save it as a set of image files. The <code>slice</code> function extracts a slice from a 3D volume along a specified axis and saves it as a set of image files in the specified directory. The slice is defined by a start index (inclusive) and an end index (exclusive) along the specified axis. The function returns a <code><a class="el" href="class_volume.html">Volume</a></code> object that represents the saved images. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">voxel</td><td>The <code><a class="el" href="class_volume.html">Volume</a></code> object to extract the slice from. </td></tr>
+    <tr><td class="paramname">start</td><td>The index of the first voxel along the specified axis to include in the slice. </td></tr>
+    <tr><td class="paramname">end</td><td>The index of the first voxel along the specified axis to exclude from the slice. </td></tr>
+    <tr><td class="paramname">axis</td><td>The axis along which to extract the slice. 0 for z-axis, 1 for y-axis, or 2 for x-axis. </td></tr>
+    <tr><td class="paramname">path</td><td>The directory path to save the slice images in. The directory will be created if it does not exist. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A <code><a class="el" href="class_volume.html">Volume</a></code> object that represents the saved images. </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::runtime_error</td><td>If the <code>voxel</code> is not sliceable along the specified axis or the <code>axis</code> input is invalid. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

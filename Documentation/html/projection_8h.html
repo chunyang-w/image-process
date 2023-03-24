@@ -74,11 +74,53 @@ $(function() {
 </div>
 </div><!-- top -->
 <div class="header">
+  <div class="summary">
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle"><div class="title">projection.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
-
+<div class="textblock"><code>#include &lt;string&gt;</code><br />
+<code>#include &lt;vector&gt;</code><br />
+<code>#include &quot;<a class="el" href="image_8h_source.html">image.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="volume_8h_source.html">volume.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="fast_image_8h_source.html">fastImage.h</a>&quot;</code><br />
+</div>
 <p><a href="projection_8h_source.html">Go to the source code of this file.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a6dcd2fb1f13749c27a3dca37d52faf96"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_f_image.html">FImage</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="projection_8h.html#a6dcd2fb1f13749c27a3dca37d52faf96">choose_projection</a> (<a class="el" href="class_volume.html">Volume</a> voxel)</td></tr>
+<tr class="memdesc:a6dcd2fb1f13749c27a3dca37d52faf96"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns an <a class="el" href="class_f_image.html">FImage</a> object representing the 2D projection of a given 3D volume. This function prompts the user to select a projection method and projection plane, and then calculates the 2D projection of the input 3D volume data using the chosen method and plane. The function supports three projection methods: max projection, min projection, and average projection, and three projection planes: XY plane, XZ plane, and YZ plane.  <br /></td></tr>
+<tr class="separator:a6dcd2fb1f13749c27a3dca37d52faf96"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="a6dcd2fb1f13749c27a3dca37d52faf96" name="a6dcd2fb1f13749c27a3dca37d52faf96"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6dcd2fb1f13749c27a3dca37d52faf96">&#9670;&#160;</a></span>choose_projection()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_f_image.html">FImage</a> choose_projection </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_volume.html">Volume</a>&#160;</td>
+          <td class="paramname"><em>voxel</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns an <a class="el" href="class_f_image.html">FImage</a> object representing the 2D projection of a given 3D volume. This function prompts the user to select a projection method and projection plane, and then calculates the 2D projection of the input 3D volume data using the chosen method and plane. The function supports three projection methods: max projection, min projection, and average projection, and three projection planes: XY plane, XZ plane, and YZ plane. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">voxel</td><td>- A <a class="el" href="class_volume.html">Volume</a> object containing the input 3D volume data. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="class_f_image.html">FImage</a> - An <a class="el" href="class_f_image.html">FImage</a> object representing the 2D projection of the input 3D volume data. </dd></dl>
+
+</div>
+</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

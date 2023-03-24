@@ -45,7 +45,10 @@ If processing a 2D image, the high level flow is as follows:
 Output images are saved in the filter of their name, in the output folder. Their name corresponds to the filter applied, and if multiple filters have been applied, these will be concatenated together.
 
 If processing a 3D image, the high level flow is as follows:
-....
+* Enter which processing procedure to carry out, eg: Gaussian3D, Median 3D, Projection, Slicing ...
+* Choose which dataset to use (could be predownloaded datasets or userdefined)
+* Choose parameters to apply, eg: kernel size, slicing range ...
+* The operation is then applied and save the output to a folder.
 
 
 ## 📖 Documentation
@@ -68,23 +71,41 @@ make runtest
 
 ## 📁 Code Structure (TBC)
 
+*For further details please refer to the documentation.*
 ```
 main.cpp (main source code)
+tests.cpp (test code)
 makefile (make file that controls the generation of the program)
+makefile_g++ (alternative make file)
 |- build (objective files)
-    |- image.o
+    |- fastImage.o
     |- filter.o
-    |- *.o
+    |- filter3d.o
+    |- helper.o
+    |- image.o
+    |- projection.o
+    |- slice.o
+    |- volume.o
 |- include (header files)
+    |- fastImage.h
     |- filter.h
+    |- filter3d.h
+    |- helper.h
     |- image.h
-    |- *.h
+    |- projection.h
+    |- stb_image_write.h
+    |- stb_image.h
+    |- slice.h
+    |- volume.h
 |- source (source code)
+    |- fastImage.cpp
     |- filter.cpp
+    |- filter3d.cpp
+    |- helper.cpp
     |- image.cpp
-    |- *.cpp
-|- io-demo (minimal demo here)
-    |- minimal.cpp
+    |- projection.cpp
+    |- slice.cpp
+    |- volume.cpp
 ```
 
 ## 👤 Authors

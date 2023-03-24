@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.7"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Monte Carlo - Image Processing Tool: Main Page</title>
+<title>Monte Carlo - Image Processing Tool: 🖥️ Image Processing Tool: Team Monte-Carlo</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -69,10 +69,92 @@ $(function() {
 </div>
 </div>
 
-<div class="header">
-  <div class="headertitle"><div class="title">Monte Carlo - Image Processing Tool Documentation</div></div>
+<div><div class="header">
+  <div class="headertitle"><div class="title">🖥️ <a class="el" href="class_image.html">Image</a> Processing Tool: Team Monte-Carlo </div></div>
 </div><!--header-->
 <div class="contents">
+<div class="textblock"><p><a class="anchor" id="md__r_e_a_d_m_e"></a> This program has been designed to enable quick and easy image modifications via a command line interface.</p>
+<h1><a class="anchor" id="autotoc_md1"></a>
+🔎 About</h1>
+<p>This C++ can be used to apply a range of image filters and orthographic projections to an input 2D image or 3D data volume. It contains a main function which reads an image or data volume, asks the user which filter or projection to apply, calls separate functions for the appropriate filter and/or projections, and saves the new image with the filter/projection applied. It will work with any arbitrary image/data volume size.</p>
+<h1><a class="anchor" id="autotoc_md2"></a>
+🧪 User Instructions (TBC)</h1>
+<p>To run the program use the following commands:</p>
+<p>*(They must be exectued under the src directory and use g++-12 to compile)*</p>
+<p><b>Compile</b> </p><div class="fragment"><div class="line">make</div>
+</div><!-- fragment --><p><b>Run</b> </p><div class="fragment"><div class="line">make run</div>
+</div><!-- fragment --><p> If you wish to use g++ then </p><div class="fragment"><div class="line">make run -f makefile_g++</div>
+</div><!-- fragment --><p><b>Clean objective files</b> </p><div class="fragment"><div class="line">make clean</div>
+</div><!-- fragment --><p>Once running, the program is interacted with via entries into the command line. These are fairly self explantory, with guidance on options provided throughout, so will not be detailed here.</p>
+<p>If processing a 2D image, the high level flow is as follows:</p><ul>
+<li>Enter image name (note the image much be saved in the <a class="el" href="class_image.html">Image</a> folder)</li>
+<li>Choose type of filter to be applied</li>
+<li>Enter any additional parameters required</li>
+<li><a class="el" href="class_image.html">Image</a> is processed and saved</li>
+<li>The user has the option to apply another filter on top of the output</li>
+</ul>
+<p>Output images are saved in the filter of their name, in the output folder. Their name corresponds to the filter applied, and if multiple filters have been applied, these will be concatenated together.</p>
+<p>If processing a 3D image, the high level flow is as follows:</p><ul>
+<li>Enter which processing procedure to carry out, eg: Gaussian3D, Median 3D, Projection, Slicing ...</li>
+<li>Choose which dataset to use (could be predownloaded datasets or userdefined)</li>
+<li>Choose parameters to apply, eg: kernel size, slicing range ...</li>
+<li>The operation is then applied and save the output to a folder.</li>
+</ul>
+<h1><a class="anchor" id="autotoc_md3"></a>
+📖 Documentation</h1>
+<p>Html documentation is available in the <code>Documentation</code> folder, including details of all functions and classes, and how they should be used, as well as the contents of this README.md.</p>
+<p>This has been generated with Doxygen and can be viewed in your browser through the <code>index.html</code> file.</p>
+<h1><a class="anchor" id="autotoc_md4"></a>
+✅ Testing (TBC)</h1>
+<p>The <code><a class="el" href="test_8cpp.html">test.cpp</a></code> file contains tests for all functions and can be used to check the programs operation on your system.</p>
+<p>This can be run by navigating to the src directory and running:</p>
+<div class="fragment"><div class="line">make runtest</div>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md5"></a>
+📁 Code Structure (TBC)</h1>
+<p><em>For further details please refer to the documentation.</em> </p><div class="fragment"><div class="line">main.cpp (main source code)</div>
+<div class="line">tests.cpp (test code)</div>
+<div class="line">makefile (make file that controls the generation of the program)</div>
+<div class="line">makefile_g++ (alternative make file)</div>
+<div class="line">|- build (objective files)</div>
+<div class="line">    |- fastImage.o</div>
+<div class="line">    |- filter.o</div>
+<div class="line">    |- filter3d.o</div>
+<div class="line">    |- helper.o</div>
+<div class="line">    |- image.o</div>
+<div class="line">    |- projection.o</div>
+<div class="line">    |- slice.o</div>
+<div class="line">    |- volume.o</div>
+<div class="line">|- include (header files)</div>
+<div class="line">    |- fastImage.h</div>
+<div class="line">    |- filter.h</div>
+<div class="line">    |- filter3d.h</div>
+<div class="line">    |- helper.h</div>
+<div class="line">    |- image.h</div>
+<div class="line">    |- projection.h</div>
+<div class="line">    |- stb_image_write.h</div>
+<div class="line">    |- stb_image.h</div>
+<div class="line">    |- slice.h</div>
+<div class="line">    |- volume.h</div>
+<div class="line">|- source (source code)</div>
+<div class="line">    |- fastImage.cpp</div>
+<div class="line">    |- filter.cpp</div>
+<div class="line">    |- filter3d.cpp</div>
+<div class="line">    |- helper.cpp</div>
+<div class="line">    |- image.cpp</div>
+<div class="line">    |- projection.cpp</div>
+<div class="line">    |- slice.cpp</div>
+<div class="line">    |- volume.cpp</div>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md6"></a>
+👤 Authors</h1>
+<p>Zepeng Chen - acse-zc522</p>
+<p>Ruichen Ding - acse-rd422</p>
+<p>Georgie Mercer - edsml-gm1722</p>
+<p>Chunyang Wang - acse-cw17222</p>
+<p>Lizzie Withers - edsml-lcw22</p>
+<h1><a class="anchor" id="autotoc_md7"></a>
+📃 License</h1>
+<p><a href="https://choosealicense.com/licenses/mit/">MIT</a> </p>
+</div></div><!-- PageDoc -->
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

@@ -85,11 +85,18 @@ $(function() {
 <code>#include &lt;sys/stat.h&gt;</code><br />
 <code>#include &quot;<a class="el" href="image_8h_source.html">image.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="filter_8h_source.html">filter.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="volume_8h_source.html">volume.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="projection_8h_source.html">projection.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="fast_image_8h_source.html">fastImage.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="filter3d_8h_source.html">filter3d.h</a>&quot;</code><br />
+<code>#include &lt;cassert&gt;</code><br />
+<code>#include &lt;random&gt;</code><br />
+<code>#include &quot;<a class="el" href="slice_8h_source.html">slice.h</a>&quot;</code><br />
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:a318784effe146fce269899094cfb2f7c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#a318784effe146fce269899094cfb2f7c">apply_2d</a> (<a class="el" href="class_image.html">Image</a> img, string filter_name, string output_path)</td></tr>
-<tr class="memdesc:a318784effe146fce269899094cfb2f7c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Applies a 2D image filter to the input image img and saves the output to the specified output_path. The user can enter "help" to print available filter options. The user is also given the option to apply multiple filters sequentially to the output image (note - the result will be saved after each filter).  <br /></td></tr>
+<tr class="memdesc:a318784effe146fce269899094cfb2f7c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Applies a 2D image filter to the input image img and saves the output to the specified output_path. The user can enter "help" to print available filter options. The user is also given the option to apply multiple filters sequentially to the output image (note the result will be saved after each filter).  <br /></td></tr>
 <tr class="separator:a318784effe146fce269899094cfb2f7c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae66f6b31b5ad750f1fe042a706a4e3d4"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a> ()</td></tr>
 <tr class="separator:ae66f6b31b5ad750f1fe042a706a4e3d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -127,7 +134,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Applies a 2D image filter to the input image img and saves the output to the specified output_path. The user can enter "help" to print available filter options. The user is also given the option to apply multiple filters sequentially to the output image (note - the result will be saved after each filter). </p>
+<p>Applies a 2D image filter to the input image img and saves the output to the specified output_path. The user can enter "help" to print available filter options. The user is also given the option to apply multiple filters sequentially to the output image (note the result will be saved after each filter). </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">img</td><td>The input image to be filtered </td></tr>
