@@ -13,7 +13,7 @@ It contains a main function which reads an image or data volume, asks the user w
 To run the program use the following commands:
 
 *(They must be exectued under the src directory and use g++-12 to compile)*
-
+*(executables also have to be run under the src folder.)
 **Compile**
 ```bash
 make
