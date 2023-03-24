@@ -6,55 +6,60 @@ EXTRA_PATH = ./include/
 INCLUDES = -I $(EXTRA_PATH)
 INC = $(INCLUDES)
 
+CFLAGS = -O3
+
 SRCDIR := ./source
 SRCS := $(wildcard $(SRCDIR)/*.cpp)
 
 OBJ_DIR := ./build
 OBJS := $(patsubst ./source%.cpp, ./build%.o, $(SRCS))
 
-INPUTS := ./build/image.o ./build/volumn.o ./build/slice.o ./build/projection.o ./build/filter.o ./build/filter3d.o ./build/fastImage.o
+INPUTS := ./build/image.o ./build/volumn.o ./build/slice.o ./build/projection.o ./build/filter.o ./build/filter3d.o ./build/fastImage.o ./build/helper.o
 
 main: main.o $(INPUTS)
-	$(CXX) $(INC) $^ -o $@ -w
+	$(CXX) $(CFLAGS) $(INC) $^ -o $@ -w
 
 main.o: main.cpp
-	$(CXX) $(INC) -c $^ -o $@ -w
+	$(CXX) $(CFLAGS) $(INC) -c $^ -o $@ -w
 
 ./build/image.o: ./source/image.cpp
-	$(CXX) $(INC) -c $^ -o $@ -w
+	$(CXX) $(CFLAGS) $(INC) -c $^ -o $@ -w
 
 ./build/filter.o: ./source/filter.cpp
-	$(CXX) $(INC) -c $^ -o $@ -w
+	$(CXX) $(CFLAGS) $(INC) -c $^ -o $@ -w
 
 ./build/projection.o: ./source/projection.cpp
-	$(CXX) $(INC) -c $^ -o $@ -w
+	$(CXX) $(CFLAGS) $(INC) -c $^ -o $@ -w
 
 ./build/slice.o: ./source/slice.cpp
-	$(CXX) $(INC) -c $^ -o $@ -w
+	$(CXX) $(CFLAGS) $(INC) -c $^ -o $@ -w
 
 ./build/volumn.o: ./source/volume.cpp
-	$(CXX) $(INC) -c $^ -o $@ -w
+	$(CXX) $(CFLAGS) $(INC) -c $^ -o $@ -w
 
 ./build/filter3d.o: ./source/filter3d.cpp
-	$(CXX) $(INC) -c $^ -o $@ -w
+	$(CXX) $(CFLAGS) $(INC) -c $^ -o $@ -w
 
 ./build/fastImage.o: ./source/fastImage.cpp
-	$(CXX) $(INC) -c $^ -o $@ -w
+	$(CXX) $(CFLAGS) $(INC) -c $^ -o $@ -w
+
+./build/helper.o: ./source/helper.cpp
+	$(CXX) $(CFLAGS) $(INC) -c $^ -o $@ -w
 
 demo: ./io-demo/minimal.cpp
-	$(CXX) $(INC) $^ -o $@  -w
+	$(CXX) $(CFLAGS) $(INC) $^ -o $@  -w
 	@./demo
 
 test: test.o $(INPUTS)
-	$(CXX) $(INC) $^ -o $@ -w
+	$(CXX) $(CFLAGS) $(INC) $^ -o $@ -w
 
 test.o: test.cpp
-	$(CXX) $(INC) -c $^ -o $@ -w
+	$(CXX) $(CFLAGS) $(INC) -c $^ -o $@ -w
 
 .PHONY: runtest
 runtest:
 	@make clean
-	@make
+	@make test
 	@echo ""
 	@echo "======= RUNNING PROGRAM ======="
 	@echo ""

@@ -10,7 +10,6 @@ Members: Zepeng Chen    | acse-zc522
 # include <iostream>
 # include <string>
 # include <sys/stat.h>
-# include <filesystem>
 
 using namespace std;
 
@@ -93,7 +92,8 @@ If the folder creation fails, a runtime error is thrown.
 @throw runtime_error if the folder cannot be created.
 */
 void createFolder(std::string path) {
-    if (filesystem::exists(path.c_str())) {
+    struct stat sb;
+    if (stat(path.c_str(), &sb) == 0 && S_ISDIR(sb.st_mode)) {
         cout << "Path exists" << endl;
     } 
     else {

@@ -19,7 +19,6 @@ Members: Zepeng Chen    | acse-zc522
 # include <cassert>
 # include <random>
 # include "slice.h"
-# include <filesystem>
 # include <sys/stat.h>
 
 
@@ -271,8 +270,8 @@ int main(){
                         else if(choose_path == 3){
                             cout << "Please enter the path" << endl;
                             cin >> read_path;
-                            if (filesystem::exists(read_path.c_str()))
-                            {
+                            struct stat sb;
+                            if (stat(read_path.c_str(), &sb) == 0 && S_ISDIR(sb.st_mode)) {
                                 cout << "The path is valid" << endl;
                                 path_select = false;
                             }
