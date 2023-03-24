@@ -68,23 +68,41 @@ make runtest
 
 ## 📁 Code Structure (TBC)
 
+*For further details please refer to the documentation.*
 ```
 main.cpp (main source code)
+tests.cpp (test code)
 makefile (make file that controls the generation of the program)
+makefile_g++ (alternative make file)
 |- build (objective files)
-    |- image.o
+    |- fastImage.o
     |- filter.o
-    |- *.o
+    |- filter3d.o
+    |- helper.o
+    |- image.o
+    |- projection.o
+    |- slice.o
+    |- volume.o
 |- include (header files)
+    |- fastImage.h
     |- filter.h
+    |- filter3d.h
+    |- helper.h
     |- image.h
-    |- *.h
+    |- projection.h
+    |- stb_image_write.h
+    |- stb_image.h
+    |- slice.h
+    |- volume.h
 |- source (source code)
+    |- fastImage.cpp
     |- filter.cpp
+    |- filter3d.cpp
+    |- helper.cpp
     |- image.cpp
-    |- *.cpp
-|- io-demo (minimal demo here)
-    |- minimal.cpp
+    |- projection.cpp
+    |- slice.cpp
+    |- volume.cpp
 ```
 
 ## 👤 Authors
