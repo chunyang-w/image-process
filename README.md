@@ -4,11 +4,11 @@ This program has been designed to enable quick and easy image modifications via 
 
 ## 🔎 About
 
-This C++ can be used to apply a range of image filters and orthographic projections to an input 2D image or 3D data volume.
+This C++ programe can be used to apply a range of image filters and orthographic projections to an input 2D image or 3D data volume.
 It contains a main function which reads an image or data volume, asks the user which filter or projection to apply, calls separate functions for the appropriate filter and/or projections, and saves the new image with the filter/projection applied. It will work with any arbitrary image/data volume size.
 
 
-## 🧪 User Instructions (TBC)
+## 🧪 User Instructions
 
 To run the program use the following commands:
 
@@ -58,7 +58,7 @@ Html documentation is available in the `Documentation` folder, including details
 This has been generated with Doxygen and can be viewed in your browser through the `index.html` file.
 
 
-## ✅ Testing (TBC)
+## ✅ Testing
 
 The `test.cpp` file contains tests for all functions and can be used to check the programs operation on your system. 
 
@@ -69,7 +69,7 @@ make runtest
 ```
 
 
-## 📁 Code Structure (TBC)
+## 📁 Code Structure
 
 *For further details please refer to the documentation.*
 ```
